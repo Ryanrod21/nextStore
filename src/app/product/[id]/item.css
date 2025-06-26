@@ -1,0 +1,17 @@
+.item-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.item-page h1 {
+  font-size: 70px;
+  font-weight: bold;
+}
+
+.item-tags {
+  display: flex;
+  gap: 30px;
+}
