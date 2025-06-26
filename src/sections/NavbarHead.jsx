@@ -15,9 +15,6 @@ function NavBarHead() {
             <a href="#">Contact</a>
           </li>
           <li>
-            <a href="#">Cart</a>
-          </li>
-          <li>
             <a href="#">Login</a>
           </li>
         </ul>

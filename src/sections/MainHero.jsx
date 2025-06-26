@@ -55,6 +55,7 @@ function MainHero() {
                 </div>
               ))}
           </div>
+          <Link href={`category/groceries`}>Look for more Groceries</Link>
         </div>
 
         <div className="product-sub-box">
@@ -62,6 +63,7 @@ function MainHero() {
           <div className="row">
             {product
               .filter((item) => item.category === 'beauty')
+              .sort(() => Math.random() - 0.5)
               .slice(0, 3)
               .map((items) => (
                 <div className="product" key={items.id}>
@@ -74,6 +76,8 @@ function MainHero() {
                     className={
                       items.availabilityStatus === 'In Stock'
                         ? 'in-stock'
+                        : items.availabilityStatus === 'Low Stock'
+                        ? 'low-stock'
                         : 'out-of-stock'
                     }
                   >
@@ -82,6 +86,7 @@ function MainHero() {
                 </div>
               ))}
           </div>
+          <Link href={`category/beauty`}>Look for more Beauty</Link>
         </div>
 
         <div className="product-sub-box">
@@ -89,6 +94,7 @@ function MainHero() {
           <div className="row">
             {product
               .filter((item) => item.category === 'fragrances')
+              .sort(() => Math.random() - 0.5)
               .slice(0, 3)
               .map((items) => (
                 <div className="product" key={items.id}>
@@ -101,6 +107,8 @@ function MainHero() {
                     className={
                       items.availabilityStatus === 'In Stock'
                         ? 'in-stock'
+                        : items.availabilityStatus === 'Low Stock'
+                        ? 'low-stock'
                         : 'out-of-stock'
                     }
                   >
@@ -109,6 +117,7 @@ function MainHero() {
                 </div>
               ))}
           </div>
+          <Link href={`category/fragrances`}>Look for more Fragrances</Link>
         </div>
 
         <div className="product-sub-box">
@@ -116,6 +125,7 @@ function MainHero() {
           <div className="row">
             {product
               .filter((item) => item.category === 'furniture')
+              .sort(() => Math.random() - 0.5)
               .slice(0, 3)
               .map((items) => (
                 <div className="product" key={items.id}>
@@ -128,6 +138,8 @@ function MainHero() {
                     className={
                       items.availabilityStatus === 'In Stock'
                         ? 'in-stock'
+                        : items.availabilityStatus === 'Low Stock'
+                        ? 'low-stock'
                         : 'out-of-stock'
                     }
                   >
@@ -136,6 +148,7 @@ function MainHero() {
                 </div>
               ))}
           </div>
+          <Link href={`category/furniture`}>Look for more Furniture</Link>
         </div>
       </div>
     </div>

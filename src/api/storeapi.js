@@ -18,7 +18,7 @@ export async function getProduct(id) {
   return res.json();
 }
 
-export async function cart() {
+export async function getCart() {
   const url = `${API_BASE}/carts`;
   const res = await fetch(url);
 

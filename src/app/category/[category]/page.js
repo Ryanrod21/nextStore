@@ -31,7 +31,7 @@ export default function CategoryPage() {
 
   return (
     <div className="product-page">
-      <h1>{category}</h1>
+      <h1>{category.charAt(0).toUpperCase() + category.slice(1)}</h1>
       <div className="row">
         {product
           .filter((item) => item.category === category)

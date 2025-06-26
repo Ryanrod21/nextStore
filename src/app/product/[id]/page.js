@@ -31,7 +31,7 @@ function ProductPage() {
   return (
     <div className="item-page">
       <h1>{product.title}</h1>
-      <p>{product.rating}</p>
+      <p>Rating: {product.rating} / 5</p>
       <img src={product.thumbnail} alt={product.title} />
       <p>Description: {product.description}</p>
       <p>${product.price}</p>
