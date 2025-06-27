@@ -14,4 +14,49 @@
 .item-tags {
   display: flex;
   gap: 30px;
+  align-items: center;
+}
+
+.product-details {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.side-img {
+  display: flex;
+}
+
+.main-img-contain {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Target that auto-generated img */
+div[tabindex='-1'] {
+  object-fit: contain;
+  display: flex !important;
+  justify-content: center !important;
+}
+
+.review-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: center;
+}
+
+.review-container h2 {
+  font-size: 50px;
+}
+
+.reviews {
+  display: flex;
+  flex-direction: column;
+}
+
+.info {
+  width: 50%;
+  font-size: 20px;
 }

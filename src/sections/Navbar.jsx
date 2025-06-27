@@ -19,7 +19,7 @@ function NavBar() {
     <nav className="navbar">
       <div className="logo-links">
         <Link href="/">
-          <h2 className="logo">Store</h2>
+          <h2 className="logo">Simple Supply</h2>
         </Link>
         <div className="nav-link">
           <ul>

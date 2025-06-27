@@ -22,6 +22,7 @@ body {
   padding: 0 29px;
   background-color: black;
   color: white;
+  width: 97%;
 }
 .logo {
   margin: 0;
@@ -223,4 +224,29 @@ body {
 
 .img-side {
   cursor: pointer;
+}
+
+.link-button {
+  display: inline-block;
+  background-color: black;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.link-button:hover {
+  background-color: rgb(156, 156, 156);
+}
+
+.arrow {
+  display: inline-block;
+  transition: transform 0.3s ease;
+  margin-left: 4px;
+}
+
+.link-button:hover .arrow {
+  transform: translateX(4px);
 }

@@ -45,80 +45,113 @@ function ProductPage() {
 
   return (
     <div className="item-page">
-      <h1>{product.title}</h1>
-      <p>Rating: {product.rating} / 5</p>
       <div className="product-img-container">
-        <div>
-          {product.images.map((img, index) => (
-            <div key={index}>
-              <img
-                src={img}
-                style={{ width: '150px', height: '150px' }}
-                onClick={() => slideRef.current?.slickGoTo(index)}
-                className="img-side"
-              />
-            </div>
-          ))}
-        </div>
-        <div style={{ maxWidth: '400px', margin: '0 auto' }}>
-          {product.images.length > 1 ? (
-            <Slider ref={slideRef} {...settings}>
-              {product.images.map((src, index) => (
-                <div key={index}>
-                  <img
-                    src={src}
-                    alt={`Image ${index + 1}`}
-                    style={{ width: '100%', display: 'block' }}
-                  />
-                </div>
-              ))}
-            </Slider>
-          ) : (
-            <img
-              src={product.images[0]}
-              alt="Single product image"
-              style={{ width: '100%', display: 'block' }}
-            />
-          )}
-        </div>
-      </div>
-
-      <p>Description: {product.description}</p>
-      <p>${product.price}</p>
-      <p>{product.shippingInformation}</p>
-      <div className="item-dimensions">
-        <p>Width: {product.dimensions.width}</p>
-        <p>Height: {product.dimensions.height}</p>
-        <p>Depth: {product.dimensions.depth}</p>
-      </div>
-      <div className="item-tags">
-        {product.tags &&
-          product.tags.map((tag, index) => (
-            <div key={index}>
-              <p>{tag}</p>
-            </div>
-          ))}
-      </div>
-
-      <p
-        className={
-          product.availabilityStatus === 'In Stock'
-            ? 'in-stock'
-            : product.availabilityStatus === 'Low Stock'
-            ? 'low-stock'
-            : 'out-of-stock'
-        }
-      >
-        {product.availabilityStatus}
-      </p>
-      {product.reviews &&
-        product.reviews.map((feedback, index) => (
-          <div className="item-feedback" key={index}>
-            <h3>{feedback.reviewerName}</h3>
-            <p>{feedback.rating}</p>
-            <p>{feedback.comment}</p>
+        <div className="side-img">
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '30px',
+              marginLeft: '35px',
+              marginTop: '60px',
+            }}
+          >
+            {product.images.map((img, index) => (
+              <div key={index}>
+                <img
+                  src={img}
+                  style={{ width: '150px', height: '150px' }}
+                  onClick={() => slideRef.current?.slickGoTo(index)}
+                  className="img-side"
+                />
+              </div>
+            ))}
           </div>
-        ))}
+
+          <div className="main-img-contain">
+            {product.images.length > 1 ? (
+              <Slider ref={slideRef} {...settings}>
+                {product.images.map((src, index) => (
+                  <div key={index}>
+                    <img
+                      src={src}
+                      alt={`Image ${index + 1}`}
+                      style={{
+                        width: '700px',
+                        display: 'block',
+                        height: '700px',
+                      }}
+                    />
+                  </div>
+                ))}
+              </Slider>
+            ) : (
+              <img
+                src={product.images[0]}
+                alt="Single product image"
+                style={{ width: '100%', display: 'block' }}
+              />
+            )}
+          </div>
+        </div>
+        <div className="product-details">
+          <h1>{product.title}</h1>
+          <div className="info">
+            <h4>About This Item:</h4>
+            <p>{product.description}</p>
+
+            <h4>Rating:</h4>
+            <p>{product.rating} / 5</p>
+
+            <h4>Price:</h4>
+            <p>${product.price}</p>
+
+            <h4>Shipping Information:</h4>
+            <p>{product.shippingInformation}</p>
+
+            <h4>Item Dimensions:</h4>
+            <div className="item-dimensions">
+              <p>Width: {product.dimensions.width}</p>
+              <p>Height: {product.dimensions.height}</p>
+              <p>Depth: {product.dimensions.depth}</p>
+            </div>
+            <div className="item-tags">
+              <h4>Tags:</h4>
+              {product.tags &&
+                product.tags.map((tag, index) => (
+                  <div key={index}>
+                    <p>{tag}</p>
+                  </div>
+                ))}
+            </div>
+          </div>
+
+          <p
+            className={
+              product.availabilityStatus === 'In Stock'
+                ? 'in-stock'
+                : product.availabilityStatus === 'Low Stock'
+                ? 'low-stock'
+                : 'out-of-stock'
+            }
+          >
+            {product.availabilityStatus}
+          </p>
+        </div>
+      </div>
+      <div className="review-container">
+        <h2>Reviews:</h2>
+        <div className="reviews">
+          {product.reviews &&
+            product.reviews.map((feedback, index) => (
+              <div className="item-feedback" key={index}>
+                <h3>{feedback.reviewerName}</h3>
+                <p>{feedback.rating} / 5</p>
+                <p>{feedback.comment}</p>
+              </div>
+            ))}
+        </div>
+      </div>
     </div>
   );
 }

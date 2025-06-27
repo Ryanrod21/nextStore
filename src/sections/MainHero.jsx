@@ -55,7 +55,9 @@ function MainHero() {
                 </div>
               ))}
           </div>
-          <Link href={`category/groceries`}>Look for more Groceries</Link>
+          <Link href={`category/groceries`} className="link-button">
+            Look for more Groceries <span className="arrow">→</span>
+          </Link>
         </div>
 
         <div className="product-sub-box">
@@ -86,7 +88,9 @@ function MainHero() {
                 </div>
               ))}
           </div>
-          <Link href={`category/beauty`}>Look for more Beauty</Link>
+          <Link href={`category/beauty`} className="link-button">
+            Look for more Beauty <span className="arrow">→</span>
+          </Link>
         </div>
 
         <div className="product-sub-box">
@@ -117,7 +121,9 @@ function MainHero() {
                 </div>
               ))}
           </div>
-          <Link href={`category/fragrances`}>Look for more Fragrances</Link>
+          <Link href={`category/fragrances`} className="link-button">
+            Look for more Fragrances <span className="arrow">→</span>
+          </Link>
         </div>
 
         <div className="product-sub-box">
@@ -148,7 +154,9 @@ function MainHero() {
                 </div>
               ))}
           </div>
-          <Link href={`category/furniture`}>Look for more Furniture</Link>
+          <Link href={`category/furniture`} className="link-button">
+            Look for more Furniture <span className="arrow">→</span>
+          </Link>
         </div>
       </div>
     </div>
