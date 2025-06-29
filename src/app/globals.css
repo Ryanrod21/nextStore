@@ -19,7 +19,7 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 29px;
+  padding: 0 28px;
   background-color: black;
   color: white;
   width: 97%;
@@ -132,6 +132,7 @@ body {
   width: 100%;
   flex-direction: column;
   border-bottom: 1px solid black;
+  padding: 30px 0;
 }
 
 .row {
@@ -139,6 +140,7 @@ body {
   align-items: center;
   justify-content: center;
   width: 100%;
+  margin-bottom: 50px;
 }
 
 .in-stock {
@@ -249,4 +251,44 @@ body {
 
 .link-button:hover .arrow {
   transform: translateX(4px);
+}
+
+.cart-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.cart-item {
+  color: black;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+.cart-item p {
+  font-size: 20px;
+}
+
+.cart-item button {
+  width: 50px;
+  height: 30px;
+  font-size: 10px;
+}
+
+.cart-item img {
+  width: 80px;
+  height: 80px;
+}
+
+.nav-cart {
+  display: flex;
+  gap: 5px;
+  justify-content: center;
+  align-items: center;
+}
+
+.nav-cart p {
+  font-size: 17px;
 }

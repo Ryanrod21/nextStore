@@ -8,6 +8,7 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import { useRef } from 'react';
+import { useCart } from '@/app/context/CartContext';
 
 function ProductPage() {
   const [product, setProduct] = useState(null);
@@ -15,6 +16,8 @@ function ProductPage() {
 
   const params = useParams();
   const id = params.id;
+
+  const { addToCart } = useCart();
 
   useEffect(() => {
     async function fetchProduct() {
@@ -124,6 +127,10 @@ function ProductPage() {
                   </div>
                 ))}
             </div>
+          </div>
+
+          <div>
+            <button onClick={() => addToCart(product)}>Add to Cart</button>
           </div>
 
           <p

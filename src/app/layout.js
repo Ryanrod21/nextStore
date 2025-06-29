@@ -1,7 +1,7 @@
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import NavBar from '@/sections/Navbar';
-import NavBarHead from '@/sections/NavbarHead';
+import { CartProvider } from './context/CartContext';
 import '@/lib/fontawesome'; // ✅ path to the file you created
 
 const geistSans = Geist({
@@ -23,8 +23,10 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        <NavBar />
-        {children}
+        <CartProvider>
+          <NavBar />
+          {children}
+        </CartProvider>
       </body>
     </html>
   );
