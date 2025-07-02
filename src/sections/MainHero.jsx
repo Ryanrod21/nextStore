@@ -25,7 +25,9 @@ function MainHero() {
 
   return (
     <div className="main-page">
-      main page
+      <div style={{ width: '100%', textAlign: 'center' }}>
+        <img src="/logo.png" style={{ width: '400px' }} />
+      </div>
       <div className="main-page-products">
         <div className="product-sub-box">
           <h1>Groceries</h1>

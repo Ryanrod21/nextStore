@@ -23,7 +23,7 @@ function NavBar() {
     <nav className="navbar">
       <div className="logo-links">
         <Link href="/">
-          <h2 className="logo">Simple Supply</h2>
+          <h2 className="logo">Simple Supplies</h2>
         </Link>
         <div className="nav-link">
           <ul>

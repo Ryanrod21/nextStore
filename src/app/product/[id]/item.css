@@ -9,6 +9,7 @@
 .item-page h1 {
   font-size: 70px;
   font-weight: bold;
+  text-align: center;
 }
 
 .item-tags {
@@ -22,6 +23,8 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+  border: 1px solid black;
+  width: 35%;
 }
 
 .side-img {

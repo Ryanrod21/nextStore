@@ -12,6 +12,9 @@ import { useCart } from '@/app/context/CartContext';
 
 function ProductPage() {
   const [product, setProduct] = useState(null);
+  const [quantity, setQuantity] = useState(1);
+  const [added, setAdded] = useState(false);
+
   const slideRef = useRef(null);
 
   const params = useParams();
@@ -129,9 +132,40 @@ function ProductPage() {
             </div>
           </div>
 
-          <div>
-            <button onClick={() => addToCart(product)}>Add to Cart</button>
+          {/* 2️⃣ Add quantity selector */}
+          <div style={{ margin: '20px 0' }}>
+            <label htmlFor="quantity" style={{ marginRight: '10px' }}>
+              Quantity:
+            </label>
+            <select
+              id="quantity"
+              value={quantity}
+              onChange={(e) => setQuantity(parseInt(e.target.value))}
+            >
+              {[...Array(10)].map((_, i) => (
+                <option value={i + 1} key={i}>
+                  {i + 1}
+                </option>
+              ))}
+            </select>
           </div>
+
+          {added ? (
+            <p style={{ color: 'green', marginTop: '10px' }}>
+              Item added to cart!
+            </p>
+          ) : (
+            <button
+              onClick={() => {
+                addToCart(product, quantity);
+                setQuantity(1);
+                setAdded(true);
+                setTimeout(() => setAdded(false), 4000); // show message for 2 seconds
+              }}
+            >
+              Add to Cart
+            </button>
+          )}
 
           <p
             className={
