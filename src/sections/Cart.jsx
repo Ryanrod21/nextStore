@@ -48,10 +48,14 @@ function Cart({ toggleCart, showCart }) {
           ))
         )}
       </div>
-      <button>
-        <a href="/checkout">Check out</a>
-      </button>
-      <button onClick={toggleCart}>Close Cart</button>
+      <div className="cart-buttons">
+        <button className="checkout">
+          <a href="/checkout">Check out</a>
+        </button>
+        <button className="close-cart" onClick={toggleCart}>
+          Close Cart
+        </button>
+      </div>
     </div>
   );
 }

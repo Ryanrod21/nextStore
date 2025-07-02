@@ -6,7 +6,7 @@ function Checkout() {
   const { cartItems, removeFromCart, updateQuantity } = useCart();
   return (
     <div className="checkout-container">
-      <h1>Checkout</h1>
+      <h1>Checkout </h1>
       {cartItems.length === 0 ? (
         <p>No items in cart</p>
       ) : (
