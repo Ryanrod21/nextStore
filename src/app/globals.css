@@ -32,13 +32,6 @@ body {
     1px 1px 0 #000;
 }
 
-.nav-link ul {
-  list-style: none;
-  display: flex;
-  gap: 16px;
-  font-size: 20px;
-}
-
 .navbar-head {
   display: flex;
   justify-content: flex-end;
@@ -184,13 +177,39 @@ body {
   text-decoration: none;
 }
 
-.nav-link a:active {
+.nav-link ul {
+  list-style: none;
+  display: flex;
+  gap: 16px;
+  font-size: 20px;
+}
+
+.nav-link a {
+  text-decoration: none;
   color: white;
+  transition: color 0.2s ease;
+}
+
+.nav-link a:hover {
+  color: #000;
 }
 
 .nav-link a:visited {
-  color: white;
-  text-decoration: none;
+  color: white; /* visited link color */
+}
+
+.nav-link a.active {
+  font-weight: bold;
+  color: #0070f3; /* active link color */
+  border-bottom: 2px solid #0070f3;
+}
+
+.nav-cart a.active {
+  color: #0070f3;
+}
+
+.nav-cart p.active {
+  color: #0070f3;
 }
 
 .cart-search {

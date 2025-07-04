@@ -8,10 +8,15 @@ import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { useState } from 'react';
 import Cart from './Cart';
 import { useCart } from '@/app/context/CartContext';
+import { usePathname } from 'next/navigation'; // ✅ Correct for App Router
 
 function NavBar() {
   const [showCart, setShowCart] = useState(false);
   const { cartItems } = useCart();
+
+  const pathname = usePathname();
+
+  const isActive = (path) => pathname === path;
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -28,29 +33,49 @@ function NavBar() {
         <div className="nav-link">
           <ul>
             <li>
-              <Link href={`/category/groceries`}>Groceries</Link>
+              <Link href="/category/groceries" legacyBehavior>
+                <a className={isActive('/category/groceries') ? 'active' : ''}>
+                  Groceries
+                </a>
+              </Link>
             </li>
             <li>
-              <Link href={`/category/beauty`}>Beauty</Link>
+              <Link href="/category/beauty" legacyBehavior>
+                <a className={isActive('/category/beauty') ? 'active' : ''}>
+                  Beauty
+                </a>
+              </Link>
             </li>
             <li>
-              <Link href={`/category/fragrances`}>Fragrances</Link>
+              <Link href="/category/fragrances" legacyBehavior>
+                <a className={isActive('/category/fragrances') ? 'active' : ''}>
+                  Fragrances
+                </a>
+              </Link>
             </li>
             <li>
-              <Link href={`/category/furniture`}>Furniture</Link>
+              <Link href="/category/furniture" legacyBehavior>
+                <a className={isActive('/category/furniture') ? 'active' : ''}>
+                  Furniture
+                </a>
+              </Link>
             </li>
           </ul>
         </div>
       </div>
       <div className="cart-search">
         <div className="nav-cart">
-          <FontAwesomeIcon
-            icon={faCartShopping}
-            size="lg"
-            onClick={toggleCart}
-            className="cart-icon"
-          />
-          <p>({totalItems})</p>
+          <a className={isActive('/checkout') ? 'active' : ''}>
+            <FontAwesomeIcon
+              icon={faCartShopping}
+              size="lg"
+              onClick={toggleCart}
+              className="cart-icon"
+            />
+          </a>
+          <p className={isActive('/checkout') ? 'active' : ''}>
+            ({totalItems})
+          </p>
         </div>
 
         <Cart showCart={showCart} toggleCart={toggleCart} />
