@@ -22,10 +22,13 @@ function Cart({ toggleCart, showCart }) {
             <div className="cart-item" key={item.id}>
               <img src={item.thumbnail} />
               <p>{item.title}</p>
+              <p>${(item.price * item.quantity).toFixed(2)}</p>
+
               <div
                 style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
               >
                 <button
+                  id="add-subtract"
                   onClick={() =>
                     updateQuantity(item.id, Math.max(1, item.quantity - 1))
                   }
@@ -35,6 +38,7 @@ function Cart({ toggleCart, showCart }) {
                 </button>
                 <span>{item.quantity}</span>
                 <button
+                  id="add-subtract"
                   onClick={() =>
                     updateQuantity(item.id, Math.min(15, item.quantity + 1))
                   }

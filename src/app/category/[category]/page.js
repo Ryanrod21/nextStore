@@ -31,6 +31,9 @@ export default function CategoryPage() {
 
   return (
     <div className="product-page">
+      <div style={{ width: '100%', textAlign: 'center' }}>
+        <img src="/logo.png" style={{ width: '400px' }} />
+      </div>
       <h1>{category.charAt(0).toUpperCase() + category.slice(1)}</h1>
       <div className="row">
         {product
