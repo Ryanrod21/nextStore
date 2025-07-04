@@ -184,6 +184,10 @@ body {
   text-decoration: none;
 }
 
+.nav-link a:active {
+  color: white;
+}
+
 .nav-link a:visited {
   color: white;
   text-decoration: none;
