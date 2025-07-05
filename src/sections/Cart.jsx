@@ -8,6 +8,11 @@ function Cart({ toggleCart, showCart }) {
     e.stopPropagation();
   };
 
+  const totalPrice = cartItems.reduce(
+    (sum, item) => sum + item.price * item.quantity,
+    0
+  );
+
   return (
     <div
       className={`cart-page ${showCart ? 'show' : ''}`}
@@ -22,7 +27,14 @@ function Cart({ toggleCart, showCart }) {
             <div className="cart-item" key={item.id}>
               <img src={item.thumbnail} />
               <p>{item.title}</p>
-              <p>${(item.price * item.quantity).toFixed(2)}</p>
+              <p>
+                {' '}
+                $
+                {(item.price * item.quantity).toLocaleString(undefined, {
+                  minimumFractionDigits: 2,
+                  maximumFractionDigits: 2,
+                })}
+              </p>
 
               <div
                 style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
@@ -52,6 +64,11 @@ function Cart({ toggleCart, showCart }) {
           ))
         )}
       </div>
+
+      <p style={{ color: 'black' }}>
+        Total: $
+        {totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+      </p>
       <div className="cart-buttons">
         <button className="checkout">
           <a href="/checkout">Check out</a>

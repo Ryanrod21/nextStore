@@ -1,14 +1,38 @@
 .checkout-body {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
   width: 100%;
+  gap: 20px;
+}
+
+.checkout-container {
+  width: 90%;
+  display: flex;
+  gap: 20px;
 }
 
 .checkout-item {
-  width: 100%;
+  width: 90%;
   align-items: center;
   display: flex;
   justify-content: center;
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.08); /* very light transparent white */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  gap: 40px;
+}
+
+.checkout-price {
+  backdrop-filter: blur(10px);
+  background: rgba(255, 255, 255, 0.08); /* very light transparent white */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  border-radius: 12px;
+  height: 300px;
+  width: 15%;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }

@@ -33,31 +33,35 @@ function NavBar() {
         <div className="nav-link">
           <ul>
             <li>
-              <Link href="/category/groceries" legacyBehavior>
-                <a className={isActive('/category/groceries') ? 'active' : ''}>
-                  Groceries
-                </a>
+              <Link
+                href="/category/groceries"
+                className={isActive('/category/groceries') ? 'active' : ''}
+              >
+                Groceries
               </Link>
             </li>
             <li>
-              <Link href="/category/beauty" legacyBehavior>
-                <a className={isActive('/category/beauty') ? 'active' : ''}>
-                  Beauty
-                </a>
+              <Link
+                href="/category/beauty"
+                className={isActive('/category/beauty') ? 'active' : ''}
+              >
+                Beauty
               </Link>
             </li>
             <li>
-              <Link href="/category/fragrances" legacyBehavior>
-                <a className={isActive('/category/fragrances') ? 'active' : ''}>
-                  Fragrances
-                </a>
+              <Link
+                href="/category/fragrances"
+                className={isActive('/category/fragrances') ? 'active' : ''}
+              >
+                Fragrances
               </Link>
             </li>
             <li>
-              <Link href="/category/furniture" legacyBehavior>
-                <a className={isActive('/category/furniture') ? 'active' : ''}>
-                  Furniture
-                </a>
+              <Link
+                href="/category/furniture"
+                className={isActive('/category/furniture') ? 'active' : ''}
+              >
+                Furniture
               </Link>
             </li>
           </ul>
