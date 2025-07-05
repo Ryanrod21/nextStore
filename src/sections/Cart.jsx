@@ -65,11 +65,11 @@ function Cart({ toggleCart, showCart }) {
         )}
       </div>
 
-      <p style={{ color: 'black' }}>
-        Total: $
-        {totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}
-      </p>
       <div className="cart-buttons">
+        <p style={{ color: 'black' }}>
+          Total: $
+          {totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+        </p>
         <button className="checkout">
           <a href="/checkout">Check out</a>
         </button>

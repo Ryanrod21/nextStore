@@ -42,7 +42,13 @@ function MainHero() {
                     <img src={items.images[0]} />
                   </Link>
                   <p>{items.title}</p>
-                  <p>${items.price}</p>
+                  <p>
+                    $
+                    {items.price.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </p>
                   <p
                     className={
                       items.availabilityStatus === 'In Stock'
@@ -75,7 +81,13 @@ function MainHero() {
                     <img src={items.images[0]} />
                   </Link>
                   <p>{items.title}</p>
-                  <p>${items.price}</p>
+                  <p>
+                    $
+                    {items.price.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </p>
                   <p
                     className={
                       items.availabilityStatus === 'In Stock'
@@ -108,7 +120,13 @@ function MainHero() {
                     <img src={items.images[0]} />
                   </Link>
                   <p>{items.title}</p>
-                  <p>${items.price}</p>
+                  <p>
+                    $
+                    {items.price.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </p>
                   <p
                     className={
                       items.availabilityStatus === 'In Stock'
@@ -141,7 +159,13 @@ function MainHero() {
                     <img src={items.images[0]} />
                   </Link>
                   <p>{items.title}</p>
-                  <p>${items.price}</p>
+                  <p>
+                    $
+                    {items.price.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </p>
                   <p
                     className={
                       items.availabilityStatus === 'In Stock'

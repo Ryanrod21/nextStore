@@ -194,10 +194,6 @@ body {
   color: grey;
 }
 
-.nav-link a:visited {
-  color: white; /* visited link color */
-}
-
 .nav-link a.active {
   font-weight: bold;
   color: #0070f3; /* active link color */
@@ -306,6 +302,7 @@ body {
   border-radius: 12px;
   width: 95%;
   justify-content: center;
+  max-height: 100px;
 }
 
 .cart-item p {

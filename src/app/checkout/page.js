@@ -1,10 +1,12 @@
 'use client';
 
+import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import './checkout.css';
 
 function Checkout() {
-  const { cartItems, removeFromCart, updateQuantity } = useCart();
+  const { cartItems, removeFromCart, updateQuantity, clearCart } = useCart();
+  const [showThankYou, setShowThankYou] = useState(false);
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -12,6 +14,12 @@ function Checkout() {
     (sum, item) => sum + item.price * item.quantity,
     0
   );
+
+  const handleCheckout = () => {
+    clearCart();
+    setShowThankYou(true);
+    setTimeout(() => setShowThankYou(false), 3000);
+  };
 
   return (
     <div
@@ -26,7 +34,7 @@ function Checkout() {
           gap: '20px',
         }}
       >
-        <h1>Checkout </h1>
+        <h1>Items in Cart:</h1>
         <p style={{ fontSize: '22px' }}>{totalItems}</p>
       </div>
 
@@ -81,7 +89,12 @@ function Checkout() {
             $
             {totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}
           </p>
-          <button>Checkout</button>
+          {!showThankYou && (
+            <button onClick={handleCheckout} disabled={cartItems.length === 0}>
+              Checkout
+            </button>
+          )}
+          {showThankYou && <div>Thank you for your purchase! </div>}
         </div>
       </div>
     </div>
