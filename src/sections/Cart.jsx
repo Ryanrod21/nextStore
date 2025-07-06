@@ -18,10 +18,11 @@ function Cart({ toggleCart, showCart }) {
       className={`cart-page ${showCart ? 'show' : ''}`}
       onClick={handleClickInside}
     >
+      <img src="/logo.png" style={{ width: '140px' }} />
       <h1>Your Cart </h1>
       <div className="cart-container">
         {cartItems.length === 0 ? (
-          <p>No items in cart</p>
+          <p className="no-items-small-cart">No items in cart</p>
         ) : (
           cartItems.map((item) => (
             <div className="cart-item" key={item.id}>

@@ -151,16 +151,15 @@ function ProductPage() {
           </div>
 
           {added ? (
-            <p style={{ color: 'green', marginTop: '10px' }}>
-              Item added to cart!
-            </p>
+            <p className="item-added">Item added to cart!</p>
           ) : (
             <button
+              className="add-cart-btn"
               onClick={() => {
                 addToCart(product, quantity);
                 setQuantity(1);
                 setAdded(true);
-                setTimeout(() => setAdded(false), 4000); // show message for 2 seconds
+                setTimeout(() => setAdded(false), 4000);
               }}
             >
               Add to Cart

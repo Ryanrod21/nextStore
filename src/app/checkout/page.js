@@ -33,15 +33,12 @@ function Checkout() {
           justifyContent: 'center',
           gap: '20px',
         }}
-      >
-        <h1>Items in Cart:</h1>
-        <p style={{ fontSize: '22px' }}>{totalItems}</p>
-      </div>
+      ></div>
 
       <div className="checkout-container">
         <div className="checkout-body">
           {cartItems.length === 0 ? (
-            <p>No items in cart</p>
+            <p className="cart-noItems">No items in cart</p>
           ) : (
             cartItems.map((item) => (
               <div className="checkout-item" key={item.id}>
@@ -78,19 +75,30 @@ function Checkout() {
                     +
                   </button>
                 </div>
-                <button onClick={() => removeFromCart(item.id)}>Remove</button>
+                <button
+                  className="remove-btn"
+                  onClick={() => removeFromCart(item.id)}
+                >
+                  Remove
+                </button>
               </div>
             ))
           )}
         </div>
         <div className="checkout-price">
+          <h1 style={{ marginBottom: '0' }}>Items in Cart:</h1>
+          <p style={{ fontSize: '22px' }}>{totalItems}</p>
           <h3 style={{ color: 'black' }}>Total Price:</h3>
           <p>
             $
             {totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}
           </p>
           {!showThankYou && (
-            <button onClick={handleCheckout} disabled={cartItems.length === 0}>
+            <button
+              className="checkout-btn"
+              onClick={handleCheckout}
+              disabled={cartItems.length === 0}
+            >
               Checkout
             </button>
           )}

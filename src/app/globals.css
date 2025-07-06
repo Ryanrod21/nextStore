@@ -342,6 +342,10 @@ body {
   border: 1px solid black;
 }
 
+.cart-buttons a:visited {
+  color: black;
+}
+
 #add-subtract {
   width: 35px;
   height: 20px;
@@ -364,6 +368,7 @@ body {
 .close-cart {
   color: white;
   background-color: black;
+  cursor: pointer;
 }
 
 .nav-cart {
@@ -375,4 +380,88 @@ body {
 
 .nav-cart p {
   font-size: 17px;
+}
+
+.cart-noItems {
+  text-align: center;
+  font-size: 40px;
+  font-weight: bold;
+}
+
+.item-added {
+  margin-top: 10px;
+  font-size: 23px;
+  color: rgb(2, 184, 2);
+  font-weight: 800;
+}
+
+.add-cart-btn {
+  border-radius: 10px;
+  color: white;
+  background-color: black;
+  cursor: pointer;
+}
+
+.add-cart-btn:active {
+  background-color: gray;
+}
+
+.no-items-small-cart {
+  color: black;
+  font-size: 24px;
+}
+
+.search-container {
+  width: 300px;
+}
+
+.search-input {
+  width: 100%;
+  padding: 8px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+
+.dropdown-list {
+  position: absolute;
+  top: 37px;
+  left: 0;
+  right: 0;
+  max-height: 250px;
+  overflow-y: auto;
+  background: white;
+  border: 1px solid #ccc;
+  border-top: none;
+  z-index: 9000;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+
+.dropdown-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  color: black;
+}
+
+.dropdown-item:hover {
+  background-color: #f5f5f5;
+}
+
+.dropdown-no-results,
+.dropdown-error,
+.loading-indicator {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  padding: 8px 12px;
+  z-index: 1000;
+  color: #999;
+  font-size: 14px;
 }

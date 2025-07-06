@@ -7,16 +7,25 @@ import '../../globals.css';
 import Link from 'next/link';
 
 export default function CategoryPage() {
-  const [product, setProducts] = useState([]);
+  const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const params = useParams();
-  const category = params.category;
+  const categoryParam = params.category;
+  const categories = categoryParam.split('_'); // support /category/groceries-beauty
 
   useEffect(() => {
-    async function fetchData() {
+    async function fetchAllCategoryProducts() {
       try {
-        const data = await getCategoryProducts(category);
-        setProducts(data.products);
+        const allProducts = [];
+
+        for (const cat of categories) {
+          const data = await getCategoryProducts(cat);
+          if (data && data.products) {
+            allProducts.push(...data.products);
+          }
+        }
+
+        setProducts(allProducts);
       } catch (error) {
         console.error('Error loading category:', error);
       } finally {
@@ -24,8 +33,8 @@ export default function CategoryPage() {
       }
     }
 
-    fetchData();
-  }, [category]);
+    fetchAllCategoryProducts();
+  }, [categoryParam]);
 
   if (loading) return <p>Loading...</p>;
 
@@ -34,37 +43,44 @@ export default function CategoryPage() {
       <div style={{ width: '100%', textAlign: 'center' }}>
         <img src="/logo.png" style={{ width: '400px' }} />
       </div>
-      <h1>{category.charAt(0).toUpperCase() + category.slice(1)}</h1>
+      <h1>
+        {categories
+          .map((c) => c.charAt(0).toUpperCase() + c.slice(1))
+          .join(', ')}
+      </h1>
       <div className="row">
-        {product
-          .filter((item) => item.category === category)
-          .sort(() => Math.random() - 0.5)
-          .map((items) => (
-            <div className="product" key={items.id}>
-              <Link href={`/product/${items.id}`}>
-                <img src={items.images[0]} />
-              </Link>
-              <p>{items.title}</p>
-              <p>
-                $
-                {items.price.toLocaleString(undefined, {
-                  minimumFractionDigits: 2,
-                  maximumFractionDigits: 2,
-                })}
-              </p>
-              <p
-                className={
-                  items.availabilityStatus === 'In Stock'
-                    ? 'in-stock'
-                    : items.availabilityStatus === 'Low Stock'
-                    ? 'low-stock'
-                    : 'out-of-stock'
-                }
-              >
-                {items.availabilityStatus}
-              </p>
-            </div>
-          ))}
+        {products.length > 0 ? (
+          products
+            .sort(() => Math.random() - 0.5)
+            .map((item) => (
+              <div className="product" key={item.id}>
+                <Link href={`/product/${item.id}`}>
+                  <img src={item.images[0]} />
+                </Link>
+                <p>{item.title}</p>
+                <p>
+                  $
+                  {item.price.toLocaleString(undefined, {
+                    minimumFractionDigits: 2,
+                    maximumFractionDigits: 2,
+                  })}
+                </p>
+                <p
+                  className={
+                    item.availabilityStatus === 'In Stock'
+                      ? 'in-stock'
+                      : item.availabilityStatus === 'Low Stock'
+                      ? 'low-stock'
+                      : 'out-of-stock'
+                  }
+                >
+                  {item.availabilityStatus}
+                </p>
+              </div>
+            ))
+        ) : (
+          <p>No products found for these categories.</p>
+        )}
       </div>
     </div>
   );

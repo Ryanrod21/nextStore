@@ -36,3 +36,23 @@
   flex-direction: column;
   align-items: center;
 }
+
+.checkout-btn {
+  border-radius: 10px;
+  background-color: rgb(68, 255, 68);
+}
+
+.checkout-btn:active {
+  background-color: green;
+}
+
+.remove-btn {
+  border-radius: 10px;
+  background-color: rgb(247, 65, 65);
+  max-width: 100px;
+  height: 30px;
+}
+
+.remove-btn:active {
+  background-color: red;
+}
