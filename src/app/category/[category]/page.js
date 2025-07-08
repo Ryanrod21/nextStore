@@ -7,13 +7,14 @@ import '../../globals.css';
 import Link from 'next/link';
 import Image from 'next/image';
 import StarRating from '@/components/StarRating';
+import { useMemo } from 'react';
 
 export default function CategoryPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const params = useParams();
   const categoryParam = params.category;
-  const categories = categoryParam.split('_'); // support /category/groceries-beauty
+  const categories = useMemo(() => categoryParam.split('_'), [categoryParam]);
 
   const categoryTitleMap = {
     'mens-watches_mens-shirts_mens-shoes': "All Men's",
@@ -44,7 +45,7 @@ export default function CategoryPage() {
     }
 
     fetchAllCategoryProducts();
-  }, [categoryParam]);
+  }, [categories]);
 
   if (loading) return <p>Loading...</p>;
 

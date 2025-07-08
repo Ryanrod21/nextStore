@@ -15,7 +15,7 @@ export default async function SearchPage({ searchParams }) {
       className="product-page"
       style={{ width: '100%', textAlign: 'center' }}
     >
-      <h1 className="text-2xl font-bold mb-4">Search results for "{query}"</h1>
+      <h1 className="text-2xl font-bold mb-4">Search results for {query}</h1>
       <div style={{ width: '100%', textAlign: 'center' }}>
         <div className="row">
           {results
