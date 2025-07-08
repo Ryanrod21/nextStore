@@ -5,6 +5,7 @@ import { getCategoryProducts } from '@/api/storeapi';
 import { useParams } from 'next/navigation';
 import '../../globals.css';
 import Link from 'next/link';
+import Image from 'next/image';
 import StarRating from '@/components/StarRating';
 
 export default function CategoryPage() {
@@ -49,9 +50,6 @@ export default function CategoryPage() {
 
   return (
     <div className="product-page">
-      <div style={{ width: '100%', textAlign: 'center' }}>
-        <img src="/logo.png" style={{ width: '400px' }} />
-      </div>
       <h1>{displayTitle}</h1>
       <div className="row">
         {products.length > 0 ? (
@@ -60,7 +58,14 @@ export default function CategoryPage() {
             .map((item) => (
               <div className="product" key={item.id}>
                 <Link href={`/product/${item.id}`}>
-                  <img src={item.images[0]} />
+                  <Image
+                    src={item.images[0]}
+                    alt="Product Image"
+                    width={400} // set appropriate width
+                    height={400} // set appropriate height
+                    style={{ objectFit: 'contain' }} // optional styling
+                    unoptimized // add if image is external and not configured in next.config.js
+                  />
                 </Link>
                 <p>{item.title}</p>
                 <p>

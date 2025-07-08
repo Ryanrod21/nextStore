@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { getAllCategory, getAllProducts } from '@/api/storeapi';
 import '../app/globals.css';
 import Link from 'next/link';
+import Image from 'next/image';
 
 function MainHero() {
   const [product, setProduct] = useState([]);
@@ -29,9 +30,6 @@ function MainHero() {
 
   return (
     <div className="main-page">
-      <div style={{ width: '100%', textAlign: 'center' }}>
-        <img src="/logo.png" style={{ width: '400px' }} />
-      </div>
       <div className="main-page-products">
         <div className="product-sub-box">
           <h1>Groceries</h1>
@@ -43,7 +41,14 @@ function MainHero() {
               .map((items) => (
                 <div className="product" key={items.id}>
                   <Link href={`/product/${items.id}`}>
-                    <img src={items.images[0]} />
+                    <Image
+                      src={items.images[0]}
+                      alt="Image"
+                      width={400} // set desired width
+                      height={400} // set desired height
+                      style={{ objectFit: 'contain' }}
+                      unoptimized // add if external image without domain config
+                    />
                   </Link>
                   <p>{items.title}</p>
                   <p>
@@ -82,7 +87,14 @@ function MainHero() {
               .map((items) => (
                 <div className="product" key={items.id}>
                   <Link href={`/product/${items.id}`}>
-                    <img src={items.images[0]} />
+                    <Image
+                      src={items.images[0]}
+                      alt="Image"
+                      width={400} // set desired width
+                      height={400} // set desired height
+                      style={{ objectFit: 'contain' }}
+                      unoptimized // add if external image without domain config
+                    />
                   </Link>
                   <p>{items.title}</p>
                   <p>
@@ -121,7 +133,14 @@ function MainHero() {
               .map((items) => (
                 <div className="product" key={items.id}>
                   <Link href={`/product/${items.id}`}>
-                    <img src={items.images[0]} />
+                    <Image
+                      src={items.images[0]}
+                      alt="Image"
+                      width={400} // set desired width
+                      height={400} // set desired height
+                      style={{ objectFit: 'contain' }}
+                      unoptimized // add if external image without domain config
+                    />
                   </Link>
                   <p>{items.title}</p>
                   <p>
@@ -160,7 +179,14 @@ function MainHero() {
               .map((items) => (
                 <div className="product" key={items.id}>
                   <Link href={`/product/${items.id}`}>
-                    <img src={items.images[0]} />
+                    <Image
+                      src={items.images[0]}
+                      alt="Image"
+                      width={400} // set desired width
+                      height={400} // set desired height
+                      style={{ objectFit: 'contain' }}
+                      unoptimized // add if external image without domain config
+                    />
                   </Link>
                   <p>{items.title}</p>
                   <p>
@@ -199,7 +225,14 @@ function MainHero() {
               .map((items) => (
                 <div className="product" key={items.id}>
                   <Link href={`/product/${items.id}`}>
-                    <img src={items.images[0]} />
+                    <Image
+                      src={items.images[0]}
+                      alt="Image"
+                      width={400} // set desired width
+                      height={400} // set desired height
+                      style={{ objectFit: 'contain' }}
+                      unoptimized // add if external image without domain config
+                    />
                   </Link>
                   <p>{items.title}</p>
                   <p>

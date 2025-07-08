@@ -3,6 +3,7 @@ import './globals.css';
 import NavBar from '@/sections/Navbar';
 import { CartProvider } from './context/CartContext';
 import '@/lib/fontawesome'; // ✅ path to the file you created
+import LogoImage from '@/sections/LogoImg';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -25,6 +26,7 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <CartProvider>
           <NavBar />
+          <LogoImage />
           {children}
         </CartProvider>
       </body>

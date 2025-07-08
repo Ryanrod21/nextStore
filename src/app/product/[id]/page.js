@@ -4,10 +4,10 @@ import { getProduct } from '@/api/storeapi';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import './item.css';
-import { useRef } from 'react';
 import { useCart } from '@/app/context/CartContext';
 import Breadcrumbs from '@/components/Breadcrumbs';
 import StarRating from '@/components/StarRating';
+import Image from 'next/image';
 
 function ProductPage() {
   const [product, setProduct] = useState(null);
@@ -59,16 +59,17 @@ function ProductPage() {
         <div className="side-img">
           <div className="main-img-contain">
             <div className="main-img-contain">
-              <img
+              <Image
                 src={product.images[activeImageIndex]}
                 alt={`Image ${activeImageIndex + 1}`}
+                width={600}
+                height={600}
                 style={{
-                  width: '600px',
-                  height: '600px',
                   objectFit: 'cover',
                   display: 'block',
                   marginBottom: '30px',
                 }}
+                unoptimized={true} // optional, if src is external and not in next.config.js domains
               />
             </div>
           </div>
@@ -81,23 +82,34 @@ function ProductPage() {
             }}
           >
             {product.images.map((src, index) => (
-              <img
+              <div
                 key={index}
-                src={src}
-                alt={`Thumbnail ${index + 1}`}
                 onClick={() => setActiveImageIndex(index)}
                 style={{
                   width: '100px',
                   height: '100px',
                   cursor: 'pointer',
-                  objectFit: 'cover',
                   border:
                     activeImageIndex === index
                       ? '2px solid black'
                       : '1px solid #ccc',
                   borderRadius: '4px',
+                  overflow: 'hidden', // so borderRadius clips the image
+                  display: 'inline-block', // keeps thumbnails inline
+                  position: 'relative', // required for Image fill mode
+                  marginRight: '8px', // optional spacing between thumbnails
                 }}
-              />
+              >
+                <Image
+                  src={src}
+                  alt={`Thumbnail ${index + 1}`}
+                  fill
+                  style={{ objectFit: 'cover' }}
+                  unoptimized // add this if the images are from external URLs and you don't want to configure domains
+                  sizes="100px"
+                  priority={activeImageIndex === index} // prioritize loading active thumbnail
+                />
+              </div>
             ))}
           </div>
         </div>

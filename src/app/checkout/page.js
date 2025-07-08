@@ -3,6 +3,8 @@
 import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import './checkout.css';
+import Link from 'next/link';
+import Image from 'next/image';
 
 function Checkout() {
   const { cartItems, removeFromCart, updateQuantity, clearCart } = useCart();
@@ -25,7 +27,6 @@ function Checkout() {
     <div
       style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
     >
-      <img src="/logo.png" style={{ width: '400px' }} />
       <div
         style={{
           display: 'flex',
@@ -42,7 +43,16 @@ function Checkout() {
           ) : (
             cartItems.map((item) => (
               <div className="checkout-item" key={item.id}>
-                <img src={item.thumbnail} />
+                <Link href={`/product/${item.id}`}>
+                  <Image
+                    src={item.thumbnail}
+                    alt={`Thumbnail of product ${item.id}`}
+                    width={200} // specify width
+                    height={200} // specify height
+                    style={{ objectFit: 'cover' }}
+                    unoptimized // add if image is external and domain not configured
+                  />
+                </Link>
                 <p>{item.title}</p>
                 <p>
                   {' '}
