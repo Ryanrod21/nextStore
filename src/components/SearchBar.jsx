@@ -3,6 +3,7 @@ import '../app/globals.css';
 import { getSearch } from '@/api/storeapi';
 import Link from 'next/link';
 import StarRating from './StarRating';
+import { useRouter } from 'next/navigation';
 
 function SearchBar() {
   const [query, setQuery] = useState('');
@@ -13,12 +14,14 @@ function SearchBar() {
 
   const dropdownRef = useRef(null);
 
+  const router = useRouter();
+
   // Fetch search results as user types (debounced)
   useEffect(() => {
-    if (!query.trim()) {
+    if (query.trim().length < 3) {
       setResults([]);
       setShowDropdown(false);
-      return;
+      return; // stop if fewer than 3 chars
     }
 
     const delayDebounce = setTimeout(() => {
@@ -33,8 +36,10 @@ function SearchBar() {
     setError(null);
     try {
       const data = await getSearch(searchTerm);
-      console.log('Search API response:', data);
-      setResults(data.products || []);
+      const filtered = (data.products || []).filter((item) =>
+        item.title.toLowerCase().includes(searchTerm.toLowerCase())
+      );
+      setResults(filtered);
       setShowDropdown(true);
     } catch (err) {
       console.error(err);
@@ -57,6 +62,12 @@ function SearchBar() {
     return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
+  const handleKeyDown = (e) => {
+    if (e.key === 'Enter' && query.trim()) {
+      router.push(`/search?query=${encodeURIComponent(query.trim())}`);
+    }
+  };
+
   return (
     <div
       className="search-container"
@@ -69,6 +80,7 @@ function SearchBar() {
         placeholder="Search..."
         value={query}
         onChange={(e) => setQuery(e.target.value)}
+        onKeyDown={handleKeyDown}
         onFocus={() => query && setShowDropdown(true)}
       />
 

@@ -106,6 +106,7 @@ body {
   background: rgba(255, 255, 255, 0.1); /* semi-transparent */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   border-radius: 12px;
+  height: 450px;
 }
 
 .product h1 {
@@ -172,6 +173,7 @@ body {
 
 .product-page .product {
   width: 25%;
+  height: 450px;
 }
 
 .navbar a {

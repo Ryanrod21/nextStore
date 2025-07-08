@@ -31,7 +31,7 @@ export async function getCart() {
 }
 
 export async function getSearch(query) {
-  const url = `${API_BASE}/products/search?q=${encodeURIComponent(query)}`;
+  const url = `${API_BASE}/products/search?q=${query}`;
   const res = await fetch(url);
 
   const data = await res.json();
