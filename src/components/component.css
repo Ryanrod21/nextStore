@@ -1,0 +1,31 @@
+.star-rating {
+  display: flex;
+  gap: 4px;
+}
+
+.star-icon {
+  font-size: 20px;
+  color: lightgray;
+}
+
+.star-icon.full {
+  color: rgb(8, 122, 8);
+}
+
+.star-icon.half {
+  color: rgb(8, 122, 8);
+}
+
+.star-icon.empty {
+  color: lightgray;
+}
+
+/* Optional: add hover effect */
+.star-icon:hover {
+  color: orange;
+  cursor: pointer;
+}
+
+.search-container .star-icon {
+  font-size: 13px;
+}

@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import '../app/globals.css';
 import { getSearch } from '@/api/storeapi';
 import Link from 'next/link';
+import StarRating from './StarRating';
 
 function SearchBar() {
   const [query, setQuery] = useState('');
@@ -101,6 +102,7 @@ function SearchBar() {
                 />
                 <span>{item.title}</span>
                 <p>${item.price}</p>
+                <StarRating rating={item.rating} />
               </li>
             </Link>
           ))}

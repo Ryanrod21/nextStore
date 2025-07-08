@@ -69,23 +69,27 @@ function NavBar() {
       </div>
       <div className="cart-search">
         <div className="nav-cart">
-          <a className={isActive('/checkout') ? 'active' : ''}>
-            <FontAwesomeIcon
-              icon={faCartShopping}
-              size="lg"
-              onClick={toggleCart}
-              className="cart-icon"
-            />
-          </a>
-          <p className={isActive('/checkout') ? 'active' : ''}>
-            ({totalItems})
-          </p>
+          <SearchBar />
+
+          <div className="all-cart">
+            <a className={isActive('/checkout') ? 'active' : ''}>
+              <FontAwesomeIcon
+                icon={faCartShopping}
+                size="lg"
+                onClick={toggleCart}
+                className="cart-icon"
+              />
+            </a>
+            <p className={isActive('/checkout') ? 'active' : ''}>
+              ({totalItems})
+            </p>
+          </div>
+
+          <Cart showCart={showCart} toggleCart={toggleCart} />
+          {showCart && (
+            <div className="cart-overlay" onClick={toggleCart}></div>
+          )}
         </div>
-
-        <Cart showCart={showCart} toggleCart={toggleCart} />
-        {showCart && <div className="cart-overlay" onClick={toggleCart}></div>}
-
-        <SearchBar />
       </div>
     </nav>
   );

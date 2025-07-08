@@ -253,7 +253,7 @@ function MainHero() {
               href={`category/mens-watches_mens-shirts_mens-shoes`}
               className="link-button"
             >
-              Look for more Smartphones <span className="arrow">→</span>
+              Look all <span className="arrow">→</span>
             </Link>
           </div>
         </div>

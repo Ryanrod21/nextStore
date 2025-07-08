@@ -7,9 +7,10 @@
 }
 
 .item-page h1 {
-  font-size: 70px;
+  font-size: 45px;
   font-weight: bold;
-  text-align: center;
+  margin-bottom: 0;
+  margin-top: 15px;
 }
 
 .item-tags {
@@ -22,13 +23,20 @@
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
-  border: 1px solid black;
   width: 35%;
+}
+
+.product-head p {
+  width: 410px;
+  font-size: 15px;
 }
 
 .side-img {
   display: flex;
+
+  flex-direction: column;
+  width: 55%;
+  align-items: center;
 }
 
 .main-img-contain {
@@ -62,4 +70,51 @@ div[tabindex='-1'] {
 .info {
   width: 50%;
   font-size: 20px;
+}
+
+.price {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.breadcrumbs {
+  width: 95%;
+  margin-top: 45px;
+  margin-left: 40px;
+}
+
+.breadcrumbs a {
+  color: rgb(185, 185, 185);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.breadcrumbs a:active {
+  color: rgb(185, 185, 185);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.breadcrumbs a:hover {
+  color: rgb(185, 185, 185);
+  text-decoration: underline;
+  font-weight: bold;
+}
+
+.buy-now-btn {
+  background-color: rgb(8, 122, 8);
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.buy-now-btn:hover {
+  background-color: #333;
+}
+
+.slick-track {
+  height: 400px;
 }

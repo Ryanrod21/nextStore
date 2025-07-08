@@ -5,6 +5,7 @@ import { getCategoryProducts } from '@/api/storeapi';
 import { useParams } from 'next/navigation';
 import '../../globals.css';
 import Link from 'next/link';
+import StarRating from '@/components/StarRating';
 
 export default function CategoryPage() {
   const [products, setProducts] = useState([]);
@@ -12,6 +13,14 @@ export default function CategoryPage() {
   const params = useParams();
   const categoryParam = params.category;
   const categories = categoryParam.split('_'); // support /category/groceries-beauty
+
+  const categoryTitleMap = {
+    'mens-watches_mens-shirts_mens-shoes': "All Men's",
+  };
+
+  const displayTitle =
+    categoryTitleMap[categoryParam] ||
+    categories.map((c) => c.charAt(0).toUpperCase() + c.slice(1)).join(', ');
 
   useEffect(() => {
     async function fetchAllCategoryProducts() {
@@ -43,11 +52,7 @@ export default function CategoryPage() {
       <div style={{ width: '100%', textAlign: 'center' }}>
         <img src="/logo.png" style={{ width: '400px' }} />
       </div>
-      <h1>
-        {categories
-          .map((c) => c.charAt(0).toUpperCase() + c.slice(1))
-          .join(', ')}
-      </h1>
+      <h1>{displayTitle}</h1>
       <div className="row">
         {products.length > 0 ? (
           products
@@ -76,6 +81,7 @@ export default function CategoryPage() {
                 >
                   {item.availabilityStatus}
                 </p>
+                <StarRating rating={item.rating} />
               </div>
             ))
         ) : (
