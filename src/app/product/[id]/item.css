@@ -44,27 +44,59 @@
   margin: 0 auto;
 }
 
-/* Target that auto-generated img */
-div[tabindex='-1'] {
-  object-fit: contain;
-  display: flex !important;
-  justify-content: center !important;
-}
-
 .review-container {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: center;
+  margin-top: 3rem;
+  padding: 2rem 1rem;
+  background-color: #f7f7f7;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  width: 20%;
 }
 
 .review-container h2 {
-  font-size: 50px;
+  font-size: 1.75rem;
+  margin-bottom: 1.5rem;
+  color: #222;
+  border-bottom: 2px solid #ddd;
+  padding-bottom: 0.5rem;
+  text-align: center;
 }
 
 .reviews {
   display: flex;
   flex-direction: column;
+  gap: 1.5rem;
+}
+
+.item-feedback {
+  background-color: #fff;
+  border: 1px solid #e3e3e3;
+  padding: 1.25rem 1rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease;
+}
+
+.item-feedback:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.item-feedback h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.4rem;
+  color: #333;
+}
+
+.item-feedback p {
+  margin: 0.25rem 0;
+  color: #555;
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.item-feedback p:nth-of-type(2) {
+  font-weight: 600;
+  color: #ff9900; /* orange tone for rating */
 }
 
 .info {
@@ -101,20 +133,85 @@ div[tabindex='-1'] {
   font-weight: bold;
 }
 
+.add-cart-btn {
+  border-radius: 24px;
+  background-color: black;
+  cursor: pointer;
+  width: 215px;
+  height: 50px;
+  padding: 10px 16px;
+  color: white;
+}
+
+.add-cart-btn:hover {
+  background-color: gray;
+}
+
 .buy-now-btn {
   background-color: rgb(8, 122, 8);
   color: white;
-  border: none;
   padding: 10px 16px;
-  border-radius: 10px;
+  border-radius: 24px;
   font-weight: bold;
   cursor: pointer;
+  width: 215px;
+  height: 50px;
 }
 
 .buy-now-btn:hover {
   background-color: #333;
 }
 
-.slick-track {
-  height: 400px;
+.zoom-container {
+  position: relative; /* needed for Image fill */
+  overflow: hidden; /* hides zoom overflow */
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.zoom-image {
+  transition: transform 0.3s ease;
+  /* Make sure the image fills container */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.zoom-container:hover .zoom-image {
+  transform: scale(1.1);
+}
+
+.small-img-container {
+  display: flex;
+  gap: 15px;
+  margin-left: 20px;
+}
+
+.small-imgs {
+  width: 100px;
+  height: 100px;
+  cursor: pointer;
+  border-radius: 4px;
+  overflow: hidden; /* // so borderRadius clips the image */
+  display: inline-block; /* // keeps thumbnails inline */
+  position: relative; /* // required for Image fill mode */
+  margin-right: 8px; /* // optional spacing between thumbnails */
+}
+
+#add-subtract {
+  width: 35px;
+  height: 20px;
+  color: white;
+  background-color: black;
+  border-radius: 12px;
+}
+
+#add-subtract:hover {
+  background-color: grey;
+}
+
+#add-subtract:disabled {
+  background-color: #e0e0e0; /* light gray background */
+  color: #888888; /* gray text */
+  cursor: not-allowed;
+  opacity: 1; /* optional: keeps it from looking faded */
 }

@@ -15,6 +15,9 @@ function ProductPage() {
   const [added, setAdded] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
+  const [transformOrigin, setTransformOrigin] = useState('center center');
+  const [isZoomed, setIsZoomed] = useState(false);
+
   const pathname = usePathname();
   const pathSegments = pathname.split('/').filter(Boolean);
 
@@ -41,6 +44,25 @@ function ProductPage() {
     }
   }, [id]);
 
+  function handleMouseMove(e) {
+    const rect = e.currentTarget.getBoundingClientRect();
+
+    // Calculate cursor position as percentage inside container
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+    setTransformOrigin(`${x}% ${y}%`);
+  }
+
+  function handleMouseLeave() {
+    setIsZoomed(false);
+    setTransformOrigin('center center');
+  }
+
+  function handleMouseEnter() {
+    setIsZoomed(true);
+  }
+
   const breadcrumbSegments = [...pathSegments];
   if (product) {
     breadcrumbSegments[breadcrumbSegments.length - 1] = product.title
@@ -58,46 +80,40 @@ function ProductPage() {
       <div className="product-img-container">
         <div className="side-img">
           <div className="main-img-contain">
-            <div className="main-img-contain">
+            <div
+              className="main-img-contain zoom-container"
+              onMouseMove={handleMouseMove}
+              onMouseLeave={handleMouseLeave}
+              onMouseEnter={handleMouseEnter}
+            >
               <Image
+                className="zoom-image"
                 src={product.images[activeImageIndex]}
                 alt={`Image ${activeImageIndex + 1}`}
                 width={600}
                 height={600}
                 style={{
                   objectFit: 'cover',
-                  display: 'block',
-                  marginBottom: '30px',
+                  transformOrigin,
+                  transform: isZoomed ? 'scale(1.5)' : 'scale(1)',
+                  transition: 'transform 0.3s ease',
                 }}
                 unoptimized={true} // optional, if src is external and not in next.config.js domains
               />
             </div>
           </div>
 
-          <div
-            style={{
-              display: 'flex',
-              gap: '15px',
-              marginLeft: '20px',
-            }}
-          >
+          <div className="small-img-container">
             {product.images.map((src, index) => (
               <div
+                className="small-imgs"
                 key={index}
                 onClick={() => setActiveImageIndex(index)}
                 style={{
-                  width: '100px',
-                  height: '100px',
-                  cursor: 'pointer',
                   border:
                     activeImageIndex === index
                       ? '2px solid black'
                       : '1px solid #ccc',
-                  borderRadius: '4px',
-                  overflow: 'hidden', // so borderRadius clips the image
-                  display: 'inline-block', // keeps thumbnails inline
-                  position: 'relative', // required for Image fill mode
-                  marginRight: '8px', // optional spacing between thumbnails
                 }}
               >
                 <Image
@@ -118,20 +134,18 @@ function ProductPage() {
             <h1>{product.title}</h1>
             <p>{product.description}</p>
             <StarRating rating={product.rating} />
-            <span>{product.rating.toFixed(2)} / 5</span>
+            <span style={{ fontWeight: '600' }}>
+              {product.rating.toFixed(2)} / 5
+            </span>
           </div>
           <div className="info">
-            <p className="price">${product.price}</p>
-
-            <div className="item-tags">
-              <h4>Tags:</h4>
-              {product.tags &&
-                product.tags.map((tag, index) => (
-                  <div key={index}>
-                    <p>{tag}</p>
-                  </div>
-                ))}
-            </div>
+            <p className="price">
+              $
+              {product.price.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </p>
           </div>
 
           {/* 2️⃣ Add quantity selector */}
@@ -199,6 +213,25 @@ function ProductPage() {
           <h4>Shipping Information:</h4>
           <p>{product.shippingInformation}</p>
 
+          <div className="item-tags">
+            <h4>Tags:</h4>
+            <div style={{ display: 'flex', gap: '5px' }}>
+              {product.tags &&
+                product.tags.map((tag, index) => (
+                  <div key={index}>
+                    <p>
+                      {tag
+                        .split(' ')
+                        .map(
+                          (word) => word.charAt(0).toUpperCase() + word.slice(1)
+                        )
+                        .join(' ')}
+                      {index < product.tags.length - 1 ? ',' : ''}
+                    </p>
+                  </div>
+                ))}
+            </div>
+          </div>
           <p
             className={
               product.availabilityStatus === 'In Stock'
@@ -219,8 +252,9 @@ function ProductPage() {
             product.reviews.map((feedback, index) => (
               <div className="item-feedback" key={index}>
                 <h3>{feedback.reviewerName}</h3>
-                <p>{feedback.rating} / 5</p>
                 <p>{feedback.comment}</p>
+                <p>{feedback.rating} / 5</p>
+                <StarRating rating={feedback.rating} />
               </div>
             ))}
         </div>

@@ -3,7 +3,7 @@ import './globals.css';
 import NavBar from '@/sections/Navbar';
 import { CartProvider } from './context/CartContext';
 import '@/lib/fontawesome'; // ✅ path to the file you created
-import LogoImage from '@/sections/LogoImg';
+import ConditionalLogo from '@/components/ConditionalLogo';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <CartProvider>
           <NavBar />
-          <LogoImage />
+          {/* <ConditionalLogo /> */}
           {children}
         </CartProvider>
       </body>

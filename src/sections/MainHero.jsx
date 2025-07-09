@@ -5,6 +5,7 @@ import { getAllCategory, getAllProducts } from '@/api/storeapi';
 import '../app/globals.css';
 import Link from 'next/link';
 import Image from 'next/image';
+import StarRating from '@/components/StarRating';
 
 function MainHero() {
   const [product, setProduct] = useState([]);
@@ -31,13 +32,38 @@ function MainHero() {
   return (
     <div className="main-page">
       <div className="main-page-products">
+        <div className="featured-container">
+          <div className="featured-item">
+            <h2>Highly Rated Items:</h2>
+            {product
+              .filter((item) => item.rating && typeof item.rating === 'number')
+              .sort((a, b) => b.rating - a.rating)
+              .slice(0, 3)
+              .map((item) => (
+                <div className="product" key={item.id}>
+                  <Link href={`/product/${item.id}`}>
+                    <Image
+                      src={item.images[0]}
+                      alt="Product Image"
+                      width={400}
+                      height={400}
+                      style={{ objectFit: 'contain' }}
+                      unoptimized
+                    />
+                  </Link>
+                  <p>{item.title}</p>
+                  <StarRating rating={item.rating} />
+                </div>
+              ))}
+          </div>
+        </div>
         <div className="product-sub-box">
           <h1>Groceries</h1>
           <div className="row">
             {product
               .filter((item) => item.category === 'groceries')
               .sort(() => Math.random() - 0.5)
-              .slice(0, 3)
+              .slice(0, 4)
               .map((items) => (
                 <div className="product" key={items.id}>
                   <Link href={`/product/${items.id}`}>
@@ -81,9 +107,9 @@ function MainHero() {
           <h1>Beuaty</h1>
           <div className="row">
             {product
-              .filter((item) => item.category === 'beauty')
+              .filter((item) => ['beauty', 'skin-care'].includes(item.category))
               .sort(() => Math.random() - 0.5)
-              .slice(0, 3)
+              .slice(0, 4)
               .map((items) => (
                 <div className="product" key={items.id}>
                   <Link href={`/product/${items.id}`}>
@@ -118,18 +144,22 @@ function MainHero() {
                 </div>
               ))}
           </div>
-          <Link href={`category/beauty`} className="link-button">
+          <Link href={`category/beauty_skin-care`} className="link-button">
             Look for more Beauty <span className="arrow">→</span>
           </Link>
         </div>
 
         <div className="product-sub-box">
-          <h1>Fragrances</h1>
+          <h1>For Mens !</h1>
           <div className="row">
             {product
-              .filter((item) => item.category === 'fragrances')
+              .filter((item) =>
+                ['mens-shirts', 'mens-shoes', 'mens-watches'].includes(
+                  item.category
+                )
+              )
               .sort(() => Math.random() - 0.5)
-              .slice(0, 3)
+              .slice(0, 4)
               .map((items) => (
                 <div className="product" key={items.id}>
                   <Link href={`/product/${items.id}`}>
@@ -164,18 +194,24 @@ function MainHero() {
                 </div>
               ))}
           </div>
-          <Link href={`category/fragrances`} className="link-button">
-            Look for more Fragrances <span className="arrow">→</span>
+          <Link href={`category/mens-fashion`} className="link-button">
+            Look for more Men's Fasion <span className="arrow">→</span>
           </Link>
         </div>
 
         <div className="product-sub-box">
-          <h1>Furniture</h1>
+          <h1>For your Home !</h1>
           <div className="row">
             {product
-              .filter((item) => item.category === 'furniture')
+              .filter((item) =>
+                [
+                  'furniture',
+                  'home-decoration',
+                  'kitchen-accessories',
+                ].includes(item.category)
+              )
               .sort(() => Math.random() - 0.5)
-              .slice(0, 3)
+              .slice(0, 4)
               .map((items) => (
                 <div className="product" key={items.id}>
                   <Link href={`/product/${items.id}`}>
@@ -210,18 +246,25 @@ function MainHero() {
                 </div>
               ))}
           </div>
-          <Link href={`category/furniture`} className="link-button">
+          <Link href={`category/all-furniture`} className="link-button">
             Look for more Furniture <span className="arrow">→</span>
           </Link>
         </div>
 
         <div className="product-sub-box">
-          <h1>Laptops</h1>
+          <h1>Electonics For You!</h1>
           <div className="row">
             {product
-              .filter((item) => item.category === 'laptops')
+              .filter((item) =>
+                [
+                  'laptops',
+                  'mobile-accessories',
+                  'smartphones',
+                  'tablets',
+                ].includes(item.category)
+              )
               .sort(() => Math.random() - 0.5)
-              .slice(0, 3)
+              .slice(0, 4)
               .map((items) => (
                 <div className="product" key={items.id}>
                   <Link href={`/product/${items.id}`}>
@@ -256,75 +299,63 @@ function MainHero() {
                 </div>
               ))}
           </div>
-          <Link href={`category/laptops`} className="link-button">
-            Look for more Laptops <span className="arrow">→</span>
+          <Link href={`category/all-electronics`} className="link-button">
+            Shop All Electronics <span className="arrow">→</span>
           </Link>
         </div>
 
-        <div>
-          <h2>Shop Mens Wear</h2>
-          <div className="product-sub-box">
-            <h1>Mens shoes</h1>
-            <Link href={`category/mens-shoes`} className="link-button">
-              Look for more Mens Shoes <span className="arrow">→</span>
-            </Link>
-          </div>
-          <div className="product-sub-box">
-            <h1>Mens Shirt</h1>
-            <Link href={`category/mens-shirts`} className="link-button">
-              Look for more Mens Shirts <span className="arrow">→</span>
-            </Link>
-          </div>
-          <div className="product-sub-box">
-            <h1>Mens Watches</h1>
-            <Link href={`category/mens-watches`} className="link-button">
-              Look for more Mens Watches <span className="arrow">→</span>
-            </Link>
-          </div>
-          <div className="product-sub-box">
-            <Link
-              href={`category/mens-watches_mens-shirts_mens-shoes`}
-              className="link-button"
-            >
-              Look all <span className="arrow">→</span>
-            </Link>
-          </div>
-        </div>
-
-        <div>
-          <h2>Electronics</h2>
-          <div className="product-sub-box">
-            <h1>Mobile Acessories</h1>
-            <Link href={`category/mobile-accessories`} className="link-button">
-              Look for more Mobile Acessories <span className="arrow">→</span>
-            </Link>
-          </div>
-          <div className="product-sub-box">
-            <h1>Smartphones</h1>
-            <Link href={`category/smartphones`} className="link-button">
-              Look for more Smartphones <span className="arrow">→</span>
-            </Link>
-          </div>
-          <div className="product-sub-box">
-            <Link
-              href={`category/smartphones_mobile-accessories`}
-              className="link-button"
-            >
-              Look all Electronics <span className="arrow">→</span>
-            </Link>
-          </div>
-        </div>
-
         <div className="product-sub-box">
-          <h1>Home Decoration</h1>
-          <Link href={`category/home-decoration`} className="link-button">
-            Look for more Home Decoration <span className="arrow">→</span>
-          </Link>
-        </div>
-        <div className="product-sub-box">
-          <h1>Sunglasses</h1>
-          <Link href={`category/sunglasses`} className="link-button">
-            Look for more Sunglasses <span className="arrow">→</span>
+          <h1>Shope all womens !</h1>
+          <div className="row">
+            {product
+              .filter((item) =>
+                [
+                  'womens-bags',
+                  'womens-dresses',
+                  'womens-jewellery',
+                  'womens-shoes',
+                  'womens-watches',
+                  'tops',
+                ].includes(item.category)
+              )
+              .sort(() => Math.random() - 0.5)
+              .slice(0, 4)
+              .map((items) => (
+                <div className="product" key={items.id}>
+                  <Link href={`/product/${items.id}`}>
+                    <Image
+                      src={items.images[0]}
+                      alt="Image"
+                      width={400} // set desired width
+                      height={400} // set desired height
+                      style={{ objectFit: 'contain' }}
+                      unoptimized // add if external image without domain config
+                    />
+                  </Link>
+                  <p>{items.title}</p>
+                  <p>
+                    $
+                    {items.price.toLocaleString(undefined, {
+                      minimumFractionDigits: 2,
+                      maximumFractionDigits: 2,
+                    })}
+                  </p>
+                  <p
+                    className={
+                      items.availabilityStatus === 'In Stock'
+                        ? 'in-stock'
+                        : items.availabilityStatus === 'Low Stock'
+                        ? 'low-stock'
+                        : 'out-of-stock'
+                    }
+                  >
+                    {items.availabilityStatus}
+                  </p>
+                </div>
+              ))}
+          </div>
+          <Link href={`category/womens-fashion`} className="link-button">
+            Look for mor Women's Fasion <span className="arrow">→</span>
           </Link>
         </div>
       </div>
