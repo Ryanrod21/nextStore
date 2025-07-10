@@ -107,21 +107,210 @@ function NavBar() {
                 </ul>
               )}
             </li>
-            <li>
-              <Link
-                href="/category/fragrances"
-                className={isActive('/category/fragrances') ? 'active' : ''}
+
+            <li ref={dropdownRef}>
+              <div
+                role="button"
+                tabIndex={0}
+                className={
+                  isActive([
+                    '/category/watches',
+                    '/category/mens-shirts',
+                    '/category/mens-shoes',
+                    '/category/all-fashion',
+                  ])
+                    ? 'active'
+                    : ''
+                }
+                style={{ cursor: 'pointer' }}
+                onClick={() => setDropdownOpen(!dropdownOpen)}
               >
-                Fragrances
-              </Link>
+                Men's Fashion
+              </div>
+              {dropdownOpen && (
+                <ul className="nav-dropdown-menu">
+                  <li>
+                    <Link href="/category/mens-shoes">Shoes </Link>
+                  </li>
+                  <li>
+                    <Link href="/category/mens-shirts">Mens Shirts</Link>
+                  </li>
+                  <li>
+                    <Link href="/category/mens-watches">Mens Watches</Link>
+                  </li>
+                  <li>
+                    <Link href="/category/mens-fashion">All Mens Fashion</Link>
+                  </li>
+                </ul>
+              )}
             </li>
-            <li>
-              <Link
-                href="/category/furniture"
-                className={isActive('/category/furniture') ? 'active' : ''}
+
+            <li ref={dropdownRef}>
+              <div
+                role="button"
+                tabIndex={0}
+                className={
+                  isActive([
+                    '/category/watches',
+                    '/category/mens-shirts',
+                    '/category/mens-shoes',
+                    '/category/all-fashion',
+                  ])
+                    ? 'active'
+                    : ''
+                }
+                style={{ cursor: 'pointer' }}
+                onClick={() => setDropdownOpen(!dropdownOpen)}
               >
-                Furniture
-              </Link>
+                Home Essentials
+              </div>
+              {dropdownOpen && (
+                <ul className="nav-dropdown-menu">
+                  <li>
+                    <Link href="/category/furniture">Furniture </Link>
+                  </li>
+                  <li>
+                    <Link href="/category/home-decroation">
+                      Home Decoration
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/category/kitchen-accessories">
+                      Kitchen Accessories
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/category/all-furniture">All Furniture</Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+
+            <li ref={dropdownRef}>
+              <div
+                role="button"
+                tabIndex={0}
+                className={
+                  isActive([
+                    '/category/watches',
+                    '/category/mens-shirts',
+                    '/category/mens-shoes',
+                    '/category/all-fashion',
+                  ])
+                    ? 'active'
+                    : ''
+                }
+                style={{ cursor: 'pointer' }}
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+              >
+                Electronics
+              </div>
+              {dropdownOpen && (
+                <ul className="nav-dropdown-menu">
+                  <li>
+                    <Link href="/category/laptops">Laptops</Link>
+                  </li>
+                  <li>
+                    <Link href="/category/mobile-accessories">
+                      Mobile Accessories
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/category/smartphones">Smartphones</Link>
+                  </li>
+                  <li>
+                    <Link href="/category/all-electronics">
+                      All Electronics
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+
+            <li ref={dropdownRef}>
+              <div
+                role="button"
+                tabIndex={0}
+                className={
+                  isActive([
+                    '/category/watches',
+                    '/category/mens-shirts',
+                    '/category/mens-shoes',
+                    '/category/all-fashion',
+                  ])
+                    ? 'active'
+                    : ''
+                }
+                style={{ cursor: 'pointer' }}
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+              >
+                Womens Fashion
+              </div>
+              {dropdownOpen && (
+                <ul className="nav-dropdown-menu">
+                  <li>
+                    <Link href="/category/womens-dresses">Womens Dresses</Link>
+                  </li>
+                  <li>
+                    <Link href="/category/womens-bags">Womens Bags</Link>
+                  </li>
+                  <li>
+                    <Link href="/category/womens-jewellery">
+                      Womens Jewellery
+                    </Link>
+                  </li>
+                  <li>
+                    <Link href="/category/womens-shoes">Womens Shoes</Link>
+                  </li>
+                  <li>
+                    <Link href="/category/womens-watches">Womens Watches</Link>
+                  </li>
+                  <li>
+                    <Link href="/category/tops">Womens Tops</Link>
+                  </li>
+                  <li>
+                    <Link href="/category/womens-fashion">
+                      All Womens Fashion
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+
+            <li ref={dropdownRef}>
+              <div
+                role="button"
+                tabIndex={0}
+                className={
+                  isActive([
+                    '/category/watches',
+                    '/category/mens-shirts',
+                    '/category/mens-shoes',
+                    '/category/all-fashion',
+                  ])
+                    ? 'active'
+                    : ''
+                }
+                style={{ cursor: 'pointer' }}
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+              >
+                Vehicles
+              </div>
+              {dropdownOpen && (
+                <ul className="nav-dropdown-menu">
+                  <li>
+                    <Link href="/category/womens-watches">Motorcycle</Link>
+                  </li>
+                  <li>
+                    <Link href="/category/tops">Vehicles</Link>
+                  </li>
+                  <li>
+                    <Link href="/category/womens-fashion">
+                      All Womens Fashion
+                    </Link>
+                  </li>
+                </ul>
+              )}
             </li>
           </ul>
         </div>

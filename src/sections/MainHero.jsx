@@ -55,7 +55,7 @@ const categoryGroups = [
   {
     title: 'Shop Vehicles!',
     categories: ['motorcycle', 'vehicle'],
-    link: 'motorcycle_vehicle',
+    link: 'all-vehicles',
     linkText: 'Look for all Vehicles',
   },
   {

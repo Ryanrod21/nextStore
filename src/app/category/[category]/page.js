@@ -29,6 +29,7 @@ const categorySlugMap = {
   'all-furniture': ['furniture', 'home-decoration', 'kitchen-accessories'],
   'sport-accessories_glasses': ['sunglasses', 'sports-accessories'],
   'all-beauty': ['beauty', 'skin-care', 'fragrances'],
+  'all-vehicles': ['motorcycle', 'vehicle'],
 };
 
 // 2. Optional display title map
@@ -39,6 +40,7 @@ const categoryTitleMap = {
   'all-furniture': 'All Furntiure',
   'sport-accessories_glasses': 'All Accessories',
   'all-beauty': 'All Beauty',
+  'all-vehicles': 'All Vehicle',
 };
 
 export default function CategoryPage() {
