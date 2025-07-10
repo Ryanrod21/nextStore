@@ -178,7 +178,7 @@ body {
 .nav-link ul {
   list-style: none;
   display: flex;
-  gap: 16px;
+  gap: 25px;
   font-size: 20px;
   z-index: 3000;
 }
@@ -491,8 +491,15 @@ body {
   justify-content: center;
   padding: 0 15px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  border-radius: 10px;
+  gap: 30px !important;
+  padding: 10px;
 }
 
 .nav-dropdown-menu li a {
   color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 190px;
 }

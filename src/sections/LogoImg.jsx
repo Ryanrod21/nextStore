@@ -1,13 +1,13 @@
 import Image from 'next/image';
 import '../app/globals.css';
 
-function LogoImage() {
+function LogoImage({ sizes }) {
   return (
     <div
       style={{
         position: 'relative',
-        width: '100%',
-        height: '400px',
+        width: '100px',
+        height: '80px',
         textAlign: 'center',
       }}
     >
@@ -17,6 +17,8 @@ function LogoImage() {
         alt="Logo"
         className="LogoImage"
         style={{ objectFit: 'contain' }}
+        sizes={sizes}
+        priority
       />
     </div>
   );

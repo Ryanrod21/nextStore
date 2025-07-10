@@ -163,6 +163,10 @@ function MainHero() {
                       <div>
                         <button
                           type="button"
+                          disabled={
+                            items.availabilityStatus !== 'In Stock' &&
+                            items.availabilityStatus !== 'Low Stock'
+                          }
                           onClick={() => {
                             addToCart(items);
                             setAddedProducts((prev) => ({

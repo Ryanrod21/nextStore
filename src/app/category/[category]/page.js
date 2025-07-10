@@ -179,6 +179,10 @@ export default function CategoryPage() {
                     <div>
                       <button
                         type="button"
+                        disabled={
+                          item.availabilityStatus !== 'In Stock' &&
+                          item.availabilityStatus !== 'Low Stock'
+                        }
                         onClick={() => {
                           addToCart(item);
                           setAddedProducts((prev) => ({

@@ -9,6 +9,7 @@ import { useState, useRef, useEffect } from 'react';
 import Cart from './Cart';
 import { useCart } from '@/app/context/CartContext';
 import { usePathname } from 'next/navigation'; // ✅ Correct for App Router
+import LogoImage from './LogoImg';
 
 function NavBar() {
   const [showCart, setShowCart] = useState(false);
@@ -68,7 +69,7 @@ function NavBar() {
     <nav className="navbar">
       <div className="logo-links">
         <Link href="/">
-          <h2 className="logo">Simple Supplies</h2>
+          <LogoImage sizes="100px" />
         </Link>
         <div className="nav-link">
           <ul>
@@ -126,6 +127,14 @@ function NavBar() {
                       Fragrances
                     </Link>
                   </li>
+                  <li>
+                    <Link
+                      href="/category/all-beauty"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      All Beauty
+                    </Link>
+                  </li>
                 </ul>
               )}
             </li>
@@ -152,16 +161,36 @@ function NavBar() {
               {openDropdown === 'mens-fashion' && (
                 <ul className="nav-dropdown-menu">
                   <li>
-                    <Link href="/category/mens-shoes">Shoes </Link>
+                    <Link
+                      href="/category/mens-shoes"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Shoes{' '}
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/category/mens-shirts">Mens Shirts</Link>
+                    <Link
+                      href="/category/mens-shirts"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Mens Shirts
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/category/mens-watches">Mens Watches</Link>
+                    <Link
+                      href="/category/mens-watches"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Mens Watches
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/category/mens-fashion">All Mens Fashion</Link>
+                    <Link
+                      href="/category/mens-fashion"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      All Mens Fashion
+                    </Link>
                   </li>
                 </ul>
               )}
@@ -189,20 +218,36 @@ function NavBar() {
               {openDropdown === 'home-essentials' && (
                 <ul className="nav-dropdown-menu">
                   <li>
-                    <Link href="/category/furniture">Furniture </Link>
+                    <Link
+                      href="/category/furniture"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Furniture{' '}
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/category/home-decoration">
+                    <Link
+                      href="/category/home-decoration"
+                      onClick={() => setDropdownOpen(false)}
+                    >
                       Home Decoration
                     </Link>
                   </li>
                   <li>
-                    <Link href="/category/kitchen-accessories">
+                    <Link
+                      href="/category/kitchen-accessories"
+                      onClick={() => setDropdownOpen(false)}
+                    >
                       Kitchen Accessories
                     </Link>
                   </li>
                   <li>
-                    <Link href="/category/all-furniture">All Furniture</Link>
+                    <Link
+                      href="/category/all-furniture"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      All Furniture
+                    </Link>
                   </li>
                 </ul>
               )}
@@ -230,18 +275,34 @@ function NavBar() {
               {openDropdown === 'electronics' && (
                 <ul className="nav-dropdown-menu">
                   <li>
-                    <Link href="/category/laptops">Laptops</Link>
+                    <Link
+                      href="/category/laptops"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Laptops
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/category/mobile-accessories">
+                    <Link
+                      href="/category/mobile-accessories"
+                      onClick={() => setDropdownOpen(false)}
+                    >
                       Mobile Accessories
                     </Link>
                   </li>
                   <li>
-                    <Link href="/category/smartphones">Smartphones</Link>
+                    <Link
+                      href="/category/smartphones"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Smartphones
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/category/all-electronics">
+                    <Link
+                      href="/category/all-electronics"
+                      onClick={() => setDropdownOpen(false)}
+                    >
                       All Electronics
                     </Link>
                   </li>
@@ -271,27 +332,58 @@ function NavBar() {
               {openDropdown === 'womens-fashion' && (
                 <ul className="nav-dropdown-menu">
                   <li>
-                    <Link href="/category/womens-dresses">Womens Dresses</Link>
+                    <Link
+                      href="/category/womens-dresses"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Womens Dresses
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/category/womens-bags">Womens Bags</Link>
+                    <Link
+                      href="/category/womens-bags"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Womens Bags
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/category/womens-jewellery">
+                    <Link
+                      href="/category/womens-jewellery"
+                      onClick={() => setDropdownOpen(false)}
+                    >
                       Womens Jewellery
                     </Link>
                   </li>
                   <li>
-                    <Link href="/category/womens-shoes">Womens Shoes</Link>
+                    <Link
+                      href="/category/womens-shoes"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Womens Shoes
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/category/womens-watches">Womens Watches</Link>
+                    <Link
+                      href="/category/womens-watches"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Womens Watches
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/category/tops">Womens Tops</Link>
+                    <Link
+                      href="/category/tops"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Womens Tops
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/category/womens-fashion">
+                    <Link
+                      href="/category/womens-fashion"
+                      onClick={() => setDropdownOpen(false)}
+                    >
                       All Womens Fashion
                     </Link>
                   </li>
@@ -321,14 +413,27 @@ function NavBar() {
               {openDropdown === 'vehicles' && (
                 <ul className="nav-dropdown-menu">
                   <li>
-                    <Link href="/category/womens-watches">Motorcycle</Link>
+                    <Link
+                      href="/category/motorcycle"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Motorcycle
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/category/tops">Vehicles</Link>
+                    <Link
+                      href="/category/vehicle"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Vehicles
+                    </Link>
                   </li>
                   <li>
-                    <Link href="/category/womens-fashion">
-                      All Womens Fashion
+                    <Link
+                      href="/category/all-vehicles"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      All Vehicles
                     </Link>
                   </li>
                 </ul>
