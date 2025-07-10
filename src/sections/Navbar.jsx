@@ -12,9 +12,8 @@ import { usePathname } from 'next/navigation'; // ✅ Correct for App Router
 
 function NavBar() {
   const [showCart, setShowCart] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [openDropdown, setOpenDropdown] = useState(null); // null or a key like 'beauty', 'fashion', etc.
   const { cartItems } = useCart();
-
   const pathname = usePathname();
 
   const isActive = (paths) => {
@@ -22,12 +21,30 @@ function NavBar() {
     return pathArray.some((path) => pathname.includes(path));
   };
 
-  const dropdownRef = useRef(null);
+  const beautyRef = useRef(null);
+  const mensFashionRef = useRef(null);
+  const homeEssentialsRef = useRef(null);
+  const electronicRef = useRef(null);
+  const womensFashionRef = useRef(null);
+  const vehiclesRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setDropdownOpen(false);
+      const refs = [
+        beautyRef,
+        mensFashionRef,
+        homeEssentialsRef,
+        electronicRef,
+        womensFashionRef,
+        vehiclesRef,
+      ];
+
+      const clickedOutsideAll = refs.every(
+        (ref) => ref.current && !ref.current.contains(event.target)
+      );
+
+      if (clickedOutsideAll) {
+        setOpenDropdown(null);
       }
     };
 
@@ -41,6 +58,10 @@ function NavBar() {
 
   const toggleCart = () => {
     setShowCart((prev) => !prev);
+  };
+
+  const handleDropdownToggle = (key) => {
+    setOpenDropdown((prev) => (prev === key ? null : key));
   };
 
   return (
@@ -59,7 +80,8 @@ function NavBar() {
                 Groceries
               </Link>
             </li>
-            <li ref={dropdownRef}>
+
+            <li ref={beautyRef}>
               <div
                 role="button"
                 tabIndex={0}
@@ -74,11 +96,11 @@ function NavBar() {
                     : ''
                 }
                 style={{ cursor: 'pointer' }}
-                onClick={() => setDropdownOpen(!dropdownOpen)}
+                onClick={() => handleDropdownToggle('beauty')}
               >
                 Beauty
               </div>
-              {dropdownOpen && (
+              {openDropdown == 'beauty' && (
                 <ul className="nav-dropdown-menu">
                   <li>
                     <Link
@@ -108,7 +130,7 @@ function NavBar() {
               )}
             </li>
 
-            <li ref={dropdownRef}>
+            <li ref={mensFashionRef}>
               <div
                 role="button"
                 tabIndex={0}
@@ -123,11 +145,11 @@ function NavBar() {
                     : ''
                 }
                 style={{ cursor: 'pointer' }}
-                onClick={() => setDropdownOpen(!dropdownOpen)}
+                onClick={() => handleDropdownToggle('mens-fashion')}
               >
                 Men's Fashion
               </div>
-              {dropdownOpen && (
+              {openDropdown === 'mens-fashion' && (
                 <ul className="nav-dropdown-menu">
                   <li>
                     <Link href="/category/mens-shoes">Shoes </Link>
@@ -145,7 +167,7 @@ function NavBar() {
               )}
             </li>
 
-            <li ref={dropdownRef}>
+            <li ref={homeEssentialsRef}>
               <div
                 role="button"
                 tabIndex={0}
@@ -160,17 +182,17 @@ function NavBar() {
                     : ''
                 }
                 style={{ cursor: 'pointer' }}
-                onClick={() => setDropdownOpen(!dropdownOpen)}
+                onClick={() => handleDropdownToggle('home-essentials')}
               >
                 Home Essentials
               </div>
-              {dropdownOpen && (
+              {openDropdown === 'home-essentials' && (
                 <ul className="nav-dropdown-menu">
                   <li>
                     <Link href="/category/furniture">Furniture </Link>
                   </li>
                   <li>
-                    <Link href="/category/home-decroation">
+                    <Link href="/category/home-decoration">
                       Home Decoration
                     </Link>
                   </li>
@@ -186,7 +208,7 @@ function NavBar() {
               )}
             </li>
 
-            <li ref={dropdownRef}>
+            <li ref={electronicRef}>
               <div
                 role="button"
                 tabIndex={0}
@@ -201,11 +223,11 @@ function NavBar() {
                     : ''
                 }
                 style={{ cursor: 'pointer' }}
-                onClick={() => setDropdownOpen(!dropdownOpen)}
+                onClick={() => handleDropdownToggle('electronics')}
               >
                 Electronics
               </div>
-              {dropdownOpen && (
+              {openDropdown === 'electronics' && (
                 <ul className="nav-dropdown-menu">
                   <li>
                     <Link href="/category/laptops">Laptops</Link>
@@ -227,7 +249,7 @@ function NavBar() {
               )}
             </li>
 
-            <li ref={dropdownRef}>
+            <li ref={womensFashionRef}>
               <div
                 role="button"
                 tabIndex={0}
@@ -242,11 +264,11 @@ function NavBar() {
                     : ''
                 }
                 style={{ cursor: 'pointer' }}
-                onClick={() => setDropdownOpen(!dropdownOpen)}
+                onClick={() => handleDropdownToggle('womens-fashion')}
               >
                 Womens Fashion
               </div>
-              {dropdownOpen && (
+              {openDropdown === 'womens-fashion' && (
                 <ul className="nav-dropdown-menu">
                   <li>
                     <Link href="/category/womens-dresses">Womens Dresses</Link>
@@ -277,7 +299,7 @@ function NavBar() {
               )}
             </li>
 
-            <li ref={dropdownRef}>
+            <li ref={vehiclesRef}>
               <div
                 role="button"
                 tabIndex={0}
@@ -292,11 +314,11 @@ function NavBar() {
                     : ''
                 }
                 style={{ cursor: 'pointer' }}
-                onClick={() => setDropdownOpen(!dropdownOpen)}
+                onClick={() => handleDropdownToggle('vehicles')}
               >
                 Vehicles
               </div>
-              {dropdownOpen && (
+              {openDropdown === 'vehicles' && (
                 <ul className="nav-dropdown-menu">
                   <li>
                     <Link href="/category/womens-watches">Motorcycle</Link>

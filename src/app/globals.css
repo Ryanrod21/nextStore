@@ -180,6 +180,7 @@ body {
   display: flex;
   gap: 16px;
   font-size: 20px;
+  z-index: 3000;
 }
 
 .nav-link a {
