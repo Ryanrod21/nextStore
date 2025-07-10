@@ -187,6 +187,10 @@ function ProductPage() {
           ) : (
             <div style={{ display: 'flex', gap: '10px' }}>
               <button
+                disabled={
+                  product.availabilityStatus !== 'In Stock' &&
+                  product.availabilityStatus !== 'Low Stock'
+                }
                 className="add-cart-btn"
                 onClick={() => {
                   addToCart(product, quantity);
@@ -200,6 +204,10 @@ function ProductPage() {
 
               <button
                 className="buy-now-btn"
+                disabled={
+                  product.availabilityStatus !== 'In Stock' &&
+                  product.availabilityStatus !== 'Low Stock'
+                }
                 onClick={() => {
                   addToCart(product, quantity);
                   router.push('/checkout');

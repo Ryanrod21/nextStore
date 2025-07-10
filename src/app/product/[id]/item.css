@@ -147,6 +147,11 @@
   background-color: gray;
 }
 
+.add-cart-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .buy-now-btn {
   background-color: rgb(8, 122, 8);
   color: white;
@@ -156,6 +161,11 @@
   cursor: pointer;
   width: 215px;
   height: 50px;
+}
+
+.buy-now-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
 .buy-now-btn:hover {

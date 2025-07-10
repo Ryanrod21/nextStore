@@ -5,18 +5,37 @@ import '../app/globals.css';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import Cart from './Cart';
 import { useCart } from '@/app/context/CartContext';
 import { usePathname } from 'next/navigation'; // ✅ Correct for App Router
 
 function NavBar() {
   const [showCart, setShowCart] = useState(false);
+  const [dropdownOpen, setDropdownOpen] = useState(false);
   const { cartItems } = useCart();
 
   const pathname = usePathname();
 
-  const isActive = (path) => pathname === path;
+  const isActive = (paths) => {
+    const pathArray = Array.isArray(paths) ? paths : [paths];
+    return pathArray.some((path) => pathname.includes(path));
+  };
+
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setDropdownOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
@@ -40,13 +59,53 @@ function NavBar() {
                 Groceries
               </Link>
             </li>
-            <li>
-              <Link
-                href="/category/beauty"
-                className={isActive('/category/beauty') ? 'active' : ''}
+            <li ref={dropdownRef}>
+              <div
+                role="button"
+                tabIndex={0}
+                className={
+                  isActive([
+                    '/category/beauty',
+                    '/category/skin-care',
+                    '/category/fragrances',
+                    '/category/all-beauty',
+                  ])
+                    ? 'active'
+                    : ''
+                }
+                style={{ cursor: 'pointer' }}
+                onClick={() => setDropdownOpen(!dropdownOpen)}
               >
                 Beauty
-              </Link>
+              </div>
+              {dropdownOpen && (
+                <ul className="nav-dropdown-menu">
+                  <li>
+                    <Link
+                      href="/category/beauty"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Beauty
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/category/skin-care"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Skin Care
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/category/fragrances"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Fragrances
+                    </Link>
+                  </li>
+                </ul>
+              )}
             </li>
             <li>
               <Link

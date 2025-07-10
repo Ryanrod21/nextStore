@@ -4,10 +4,10 @@ import { useEffect, useMemo, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { getCategoryProducts } from '@/api/storeapi';
 import '../../globals.css';
-import './category.css';
 import Link from 'next/link';
 import Image from 'next/image';
 import StarRating from '@/components/StarRating';
+import { useCart } from '@/app/context/CartContext';
 
 // 1. Slug-to-categories map
 const categorySlugMap = {
@@ -27,6 +27,8 @@ const categorySlugMap = {
     'tablets',
   ],
   'all-furniture': ['furniture', 'home-decoration', 'kitchen-accessories'],
+  'sport-accessories_glasses': ['sunglasses', 'sports-accessories'],
+  'all-beauty': ['beauty', 'skin-care', 'fragrances'],
 };
 
 // 2. Optional display title map
@@ -35,20 +37,23 @@ const categoryTitleMap = {
   'mens-fashion': "Men's Fashion",
   'all-electronics': 'All Electronics',
   'all-furniture': 'All Furntiure',
+  'sport-accessories_glasses': 'All Accessories',
+  'all-beauty': 'All Beauty',
 };
 
 export default function CategoryPage() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [addedProducts, setAddedProducts] = useState({}); // track added state per product
   const params = useParams();
   const categoryParam = params.category;
+
+  const { addToCart } = useCart();
 
   // 3. Determine real categories based on slug
   const categories = useMemo(() => {
     return categorySlugMap[categoryParam] || categoryParam.split('_');
   }, [categoryParam]);
-
-  console.log('hi', categories);
 
   // 4. Optional display title (fallback to joined version)
   const displayTitle = useMemo(() => {
@@ -131,13 +136,6 @@ export default function CategoryPage() {
           }, {})
         ).map(([categoryName, items]) => (
           <div key={categoryName} className="subcategory-section">
-            <h2 className="subcategory-title">
-              {categoryName
-                .split('-')
-                .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
-                .join(' ')}
-            </h2>
-
             <div className="row">
               {items.map((item) => (
                 <div className="product" key={item.id}>
@@ -170,7 +168,35 @@ export default function CategoryPage() {
                   >
                     {item.availabilityStatus}
                   </p>
+
                   <StarRating rating={item.rating} />
+
+                  {addedProducts[item.id] ? (
+                    <p className="item-added">Item added to cart!</p>
+                  ) : (
+                    <div>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          addToCart(item);
+                          setAddedProducts((prev) => ({
+                            ...prev,
+                            [item.id]: true,
+                          }));
+                          setTimeout(
+                            () =>
+                              setAddedProducts((prev) => ({
+                                ...prev,
+                                [item.id]: false,
+                              })),
+                            4000
+                          );
+                        }}
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>

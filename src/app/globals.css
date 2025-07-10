@@ -192,7 +192,7 @@ body {
   color: grey;
 }
 
-.nav-link a.active {
+.nav-link li.active {
   font-weight: bold;
   color: #0070f3; /* active link color */
   border-bottom: 2px solid #0070f3;
@@ -458,6 +458,7 @@ body {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   width: 50%;
+  height: 260px;
   justify-content: space-between;
   align-items: center;
   padding: 0 55px;
@@ -473,4 +474,24 @@ body {
 .featured-item .product img {
   width: 80px;
   height: 80px;
+}
+
+.nav-dropdown-toggle {
+  cursor: pointer;
+  position: relative;
+}
+
+.nav-dropdown-menu {
+  position: absolute;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.nav-dropdown-menu li a {
+  color: black;
 }
