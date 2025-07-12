@@ -193,7 +193,7 @@ body {
   color: grey;
 }
 
-.nav-link ul li.active {
+.nav-link a.active {
   font-weight: bold;
   color: #0070f3; /* active link color */
   border-bottom: 2px solid #0070f3;
@@ -204,6 +204,10 @@ body {
 }
 
 .nav-cart p.active {
+  color: #0070f3;
+}
+
+.nav-link .active {
   color: #0070f3;
 }
 
@@ -502,4 +506,20 @@ body {
   align-items: center;
   justify-content: center;
   width: 190px;
+}
+
+.subcategory-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 100px;
+}
+
+.front-product {
+  margin: 10px 0;
+}
+.front-product button {
+  background-color: rgb(16, 212, 16);
+  border-radius: 10px;
 }

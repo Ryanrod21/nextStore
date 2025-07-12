@@ -93,10 +93,8 @@ function ProductPage() {
                 width={600}
                 height={600}
                 style={{
-                  objectFit: 'cover',
                   transformOrigin,
                   transform: isZoomed ? 'scale(1.5)' : 'scale(1)',
-                  transition: 'transform 0.3s ease',
                 }}
                 unoptimized={true} // optional, if src is external and not in next.config.js domains
               />

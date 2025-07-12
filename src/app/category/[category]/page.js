@@ -176,7 +176,7 @@ export default function CategoryPage() {
                   {addedProducts[item.id] ? (
                     <p className="item-added">Item added to cart!</p>
                   ) : (
-                    <div>
+                    <div className="front-product">
                       <button
                         type="button"
                         disabled={

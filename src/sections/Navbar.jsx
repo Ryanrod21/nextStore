@@ -17,10 +17,7 @@ function NavBar() {
   const { cartItems } = useCart();
   const pathname = usePathname();
 
-  const isActive = (paths) => {
-    const pathArray = Array.isArray(paths) ? paths : [paths];
-    return pathArray.some((path) => pathname.includes(path));
-  };
+  const isActive = (paths) => paths.some((path) => pathname.startsWith(path));
 
   const beautyRef = useRef(null);
   const mensFashionRef = useRef(null);
@@ -76,13 +73,14 @@ function NavBar() {
             <li>
               <Link
                 href="/category/groceries"
-                className={isActive('/category/groceries') ? 'active' : ''}
+                className={isActive(['/category/groceries']) ? 'active' : ''}
               >
                 Groceries
               </Link>
             </li>
 
             <li ref={beautyRef}>
+              {console.log('Current pathname:', pathname)}
               <div
                 role="button"
                 tabIndex={0}
@@ -202,10 +200,10 @@ function NavBar() {
                 tabIndex={0}
                 className={
                   isActive([
-                    '/category/watches',
-                    '/category/mens-shirts',
-                    '/category/mens-shoes',
-                    '/category/all-fashion',
+                    '/category/furniture',
+                    '/category/home-decoration',
+                    '/category/kitchen-accessories',
+                    '/category/all-furniture',
                   ])
                     ? 'active'
                     : ''
@@ -259,10 +257,10 @@ function NavBar() {
                 tabIndex={0}
                 className={
                   isActive([
-                    '/category/watches',
-                    '/category/mens-shirts',
-                    '/category/mens-shoes',
-                    '/category/all-fashion',
+                    '/category/laptops',
+                    '/category/mobile-accessories',
+                    '/category/smartphones',
+                    '/category/all-electornics',
                   ])
                     ? 'active'
                     : ''
@@ -316,10 +314,13 @@ function NavBar() {
                 tabIndex={0}
                 className={
                   isActive([
-                    '/category/watches',
-                    '/category/mens-shirts',
-                    '/category/mens-shoes',
-                    '/category/all-fashion',
+                    '/category/womens-dresses',
+                    '/category/womens-bags',
+                    '/category/womens-jewellery',
+                    '/category/womens-shoes',
+                    '/category/womens-watches',
+                    '/category/tops',
+                    '/category/womens-fashion',
                   ])
                     ? 'active'
                     : ''
@@ -397,10 +398,9 @@ function NavBar() {
                 tabIndex={0}
                 className={
                   isActive([
-                    '/category/watches',
-                    '/category/mens-shirts',
-                    '/category/mens-shoes',
-                    '/category/all-fashion',
+                    '/category/motorcycle',
+                    '/category/vehicle',
+                    '/category/all-vehicle',
                   ])
                     ? 'active'
                     : ''
@@ -447,7 +447,7 @@ function NavBar() {
           <SearchBar />
 
           <div className="all-cart">
-            <a className={isActive('/checkout') ? 'active' : ''}>
+            <a className={isActive(['/checkout']) ? 'active' : ''}>
               <FontAwesomeIcon
                 icon={faCartShopping}
                 size="lg"
@@ -455,7 +455,7 @@ function NavBar() {
                 className="cart-icon"
               />
             </a>
-            <p className={isActive('/checkout') ? 'active' : ''}>
+            <p className={isActive(['/checkout']) ? 'active' : ''}>
               ({totalItems})
             </p>
           </div>
