@@ -3,8 +3,11 @@
 import { useState } from 'react';
 import { useCart } from '../context/CartContext';
 import './checkout.css';
+import '../globals.css';
 import Link from 'next/link';
 import Image from 'next/image';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 function Checkout() {
   const { cartItems, removeFromCart, updateQuantity, clearCart } = useCart();
@@ -25,7 +28,13 @@ function Checkout() {
 
   return (
     <div
-      style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        paddingTop: '200px',
+        width: '100%',
+      }}
     >
       <div
         style={{
@@ -65,15 +74,31 @@ function Checkout() {
                 <div
                   style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
                 >
-                  <button
-                    id="add-subtract"
-                    onClick={() =>
-                      updateQuantity(item.id, Math.max(1, item.quantity - 1))
-                    }
-                    disabled={item.quantity <= 1}
-                  >
-                    −
-                  </button>
+                  {item.quantity === 1 ? (
+                    <button
+                      style={{ backgroundColor: 'red' }}
+                      id="add-subtract"
+                      onClick={() => removeFromCart(item.id)}
+                    >
+                      <FontAwesomeIcon
+                        icon={faTrash}
+                        style={{ fontSize: '20px' }}
+                      />
+                    </button>
+                  ) : (
+                    <button
+                      style={{ backgroundColor: 'white', color: 'black' }}
+                      id="add-subtract"
+                      onClick={() =>
+                        updateQuantity(item.id, Math.max(1, item.quantity - 1))
+                      }
+                    >
+                      <FontAwesomeIcon
+                        icon={faMinus}
+                        style={{ fontSize: '20px' }}
+                      />
+                    </button>
+                  )}
                   <span>{item.quantity}</span>
                   <button
                     id="add-subtract"
@@ -82,24 +107,21 @@ function Checkout() {
                     }
                     disabled={item.quantity >= 15}
                   >
-                    +
+                    <FontAwesomeIcon
+                      icon={faPlus}
+                      style={{ fontSize: '20px' }}
+                    />
                   </button>
                 </div>
-                <button
-                  className="remove-btn"
-                  onClick={() => removeFromCart(item.id)}
-                >
-                  Remove
-                </button>
               </div>
             ))
           )}
         </div>
         <div className="checkout-price">
           <h1 style={{ marginBottom: '0' }}>Items in Cart:</h1>
-          <p style={{ fontSize: '22px' }}>{totalItems}</p>
+          <p style={{ fontSize: '26px', fontWeight: 'bold' }}>{totalItems}</p>
           <h3 style={{ color: 'black' }}>Total Price:</h3>
-          <p>
+          <p style={{ fontSize: '18px' }}>
             $
             {totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}
           </p>

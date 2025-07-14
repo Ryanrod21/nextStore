@@ -1,5 +1,7 @@
 import { useCart } from '@/app/context/CartContext';
 import '../app/globals.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash, faMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 
 function Cart({ toggleCart, showCart }) {
   const { cartItems, removeFromCart, updateQuantity } = useCart(); // ✅ Use from context
@@ -7,6 +9,8 @@ function Cart({ toggleCart, showCart }) {
   const handleClickInside = (e) => {
     e.stopPropagation();
   };
+
+  const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
 
   const totalPrice = cartItems.reduce(
     (sum, item) => sum + item.price * item.quantity,
@@ -18,8 +22,10 @@ function Cart({ toggleCart, showCart }) {
       className={`cart-page ${showCart ? 'show' : ''}`}
       onClick={handleClickInside}
     >
-      <img src="/logo.png" style={{ width: '140px' }} />
-      <h1>Your Cart </h1>
+      <div style={{ width: '100%', backgroundColor: 'black' }}>
+        <img src="/logo.png" style={{ width: '168px' }} />
+      </div>
+      <h1>Your Cart ({totalItems}) </h1>
       <div className="cart-container">
         {cartItems.length === 0 ? (
           <p className="no-items-small-cart">No items in cart</p>
@@ -40,15 +46,26 @@ function Cart({ toggleCart, showCart }) {
               <div
                 style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
               >
-                <button
-                  id="add-subtract"
-                  onClick={() =>
-                    updateQuantity(item.id, Math.max(1, item.quantity - 1))
-                  }
-                  disabled={item.quantity <= 1}
-                >
-                  −
-                </button>
+                {item.quantity === 1 ? (
+                  <button
+                    id="add-subtract"
+                    onClick={() => removeFromCart(item.id)}
+                  >
+                    <FontAwesomeIcon
+                      icon={faTrash}
+                      style={{ fontSize: '15px' }}
+                    />
+                  </button>
+                ) : (
+                  <button
+                    id="add-subtract"
+                    onClick={() =>
+                      updateQuantity(item.id, Math.max(1, item.quantity - 1))
+                    }
+                  >
+                    <FontAwesomeIcon icon={faMinus} />
+                  </button>
+                )}
                 <span>{item.quantity}</span>
                 <button
                   id="add-subtract"
@@ -57,10 +74,9 @@ function Cart({ toggleCart, showCart }) {
                   }
                   disabled={item.quantity >= 15}
                 >
-                  +
+                  <FontAwesomeIcon icon={faPlus} />
                 </button>
               </div>
-              <button onClick={() => removeFromCart(item.id)}>Remove</button>
             </div>
           ))
         )}

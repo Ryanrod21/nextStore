@@ -118,7 +118,14 @@ function MainHero() {
 
         {categoryGroups.map(({ title, categories, link, linkText }) => (
           <div className="product-sub-box" key={link}>
-            <h1>{title}</h1>
+            <h1
+              style={{
+                fontSize: '45px',
+                marginBottom: '70px',
+              }}
+            >
+              {title}
+            </h1>
             <div className="row">
               {product
                 .filter((item) => categories.includes(item.category))
@@ -135,58 +142,88 @@ function MainHero() {
                         unoptimized
                       />
                     </Link>
-                    <p>{items.title}</p>
-                    <p>
-                      $
-                      {items.price.toLocaleString(undefined, {
-                        minimumFractionDigits: 2,
-                        maximumFractionDigits: 2,
-                      })}
-                    </p>
-                    <p
-                      className={
-                        items.availabilityStatus === 'In Stock'
-                          ? 'in-stock'
-                          : items.availabilityStatus === 'Low Stock'
-                          ? 'low-stock'
-                          : 'out-of-stock'
-                      }
+                    <div
+                      style={{
+                        backgroundColor: 'black',
+                        width: '100%',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                        borderRadius: '0 0 10px 10px',
+                        color: 'white',
+                      }}
                     >
-                      {items.availabilityStatus}
-                    </p>
+                      <p
+                        className="front-prod-title"
+                        style={{
+                          fontSize: '26px',
+                          fontWeight: 'bold',
+                          marginBottom: '0',
+                        }}
+                      >
+                        {items.title}
+                      </p>
+                      <p style={{ fontWeight: 'bold' }}>
+                        $
+                        {items.price.toLocaleString(undefined, {
+                          minimumFractionDigits: 2,
+                          maximumFractionDigits: 2,
+                        })}
+                      </p>
+                      <p
+                        className={
+                          items.availabilityStatus === 'In Stock'
+                            ? 'in-stock'
+                            : items.availabilityStatus === 'Low Stock'
+                            ? 'low-stock'
+                            : 'out-of-stock'
+                        }
+                      >
+                        {items.availabilityStatus}
+                      </p>
 
-                    <StarRating rating={items.rating} />
+                      <StarRating rating={items.rating} />
 
-                    {addedProducts[items.id] ? (
-                      <p className="item-added">Item added to cart!</p>
-                    ) : (
-                      <div className="front-product">
-                        <button
-                          type="button"
-                          disabled={
-                            items.availabilityStatus !== 'In Stock' &&
-                            items.availabilityStatus !== 'Low Stock'
-                          }
-                          onClick={() => {
-                            addToCart(items);
-                            setAddedProducts((prev) => ({
-                              ...prev,
-                              [items.id]: true,
-                            }));
-                            setTimeout(
-                              () =>
-                                setAddedProducts((prev) => ({
-                                  ...prev,
-                                  [items.id]: false,
-                                })),
-                              4000
-                            );
+                      {addedProducts[items.id] ? (
+                        <p
+                          style={{
+                            width: '100%',
+                            marginBottom: '30px',
+                            fontSize: '24px',
                           }}
+                          className="item-added"
                         >
-                          Add to Cart
-                        </button>
-                      </div>
-                    )}
+                          Item added to cart!
+                        </p>
+                      ) : (
+                        <div className="front-product">
+                          <button
+                            type="button"
+                            disabled={
+                              items.availabilityStatus !== 'In Stock' &&
+                              items.availabilityStatus !== 'Low Stock'
+                            }
+                            onClick={() => {
+                              addToCart(items);
+                              setAddedProducts((prev) => ({
+                                ...prev,
+                                [items.id]: true,
+                              }));
+                              setTimeout(
+                                () =>
+                                  setAddedProducts((prev) => ({
+                                    ...prev,
+                                    [items.id]: false,
+                                  })),
+                                4000
+                              );
+                            }}
+                          >
+                            Add to Cart
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 ))}
             </div>

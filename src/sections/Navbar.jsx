@@ -25,6 +25,7 @@ function NavBar() {
   const electronicRef = useRef(null);
   const womensFashionRef = useRef(null);
   const vehiclesRef = useRef(null);
+  const accessoriesRef = useRef(null);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -35,6 +36,7 @@ function NavBar() {
         electronicRef,
         womensFashionRef,
         vehiclesRef,
+        accessoriesRef,
       ];
 
       const clickedOutsideAll = refs.every(
@@ -434,6 +436,54 @@ function NavBar() {
                       onClick={() => setDropdownOpen(false)}
                     >
                       All Vehicles
+                    </Link>
+                  </li>
+                </ul>
+              )}
+            </li>
+
+            <li ref={accessoriesRef}>
+              <div
+                role="button"
+                tabIndex={0}
+                className={
+                  isActive([
+                    '/category/sunglasses',
+                    '/category/sports-accessories',
+                    '/category/sport-accessories_glasses',
+                  ])
+                    ? 'active'
+                    : ''
+                }
+                style={{ cursor: 'pointer' }}
+                onClick={() => handleDropdownToggle('accessories')}
+              >
+                Accessories
+              </div>
+              {openDropdown === 'accessories' && (
+                <ul className="nav-dropdown-menu">
+                  <li>
+                    <Link
+                      href="/category/sunglasses"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Sunglasses
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/category/sports-accessories"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      Sports Accessories
+                    </Link>
+                  </li>
+                  <li>
+                    <Link
+                      href="/category/sport-accessories_glasses"
+                      onClick={() => setDropdownOpen(false)}
+                    >
+                      All Accessories
                     </Link>
                   </li>
                 </ul>

@@ -77,6 +77,8 @@ export default function CategoryPage() {
       try {
         const allProducts = [];
 
+        console.log(allProducts);
+
         for (const cat of categories) {
           const data = await getCategoryProducts(cat);
           if (data?.products) {
@@ -151,58 +153,89 @@ export default function CategoryPage() {
                       unoptimized
                     />
                   </Link>
-                  <p>{item.title}</p>
-                  <p>
-                    $
-                    {item.price.toLocaleString(undefined, {
-                      minimumFractionDigits: 2,
-                      maximumFractionDigits: 2,
-                    })}
-                  </p>
-                  <p
-                    className={
-                      item.availabilityStatus === 'In Stock'
-                        ? 'in-stock'
-                        : item.availabilityStatus === 'Low Stock'
-                        ? 'low-stock'
-                        : 'out-of-stock'
-                    }
+                  <div
+                    style={{
+                      backgroundColor: 'black',
+                      width: '100%',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      alignItems: 'center',
+                      borderRadius: '0 0 10px 10px',
+                      color: 'white',
+                    }}
                   >
-                    {item.availabilityStatus}
-                  </p>
+                    <p
+                      className="front-prod-title"
+                      style={{
+                        fontSize: '26px',
+                        fontWeight: 'bold',
+                        marginBottom: '0',
+                      }}
+                    >
+                      {item.title}
+                    </p>
 
-                  <StarRating rating={item.rating} />
+                    <p>
+                      $
+                      {item.price.toLocaleString(undefined, {
+                        minimumFractionDigits: 2,
+                        maximumFractionDigits: 2,
+                      })}
+                    </p>
+                    <p
+                      className={
+                        item.availabilityStatus === 'In Stock'
+                          ? 'in-stock'
+                          : item.availabilityStatus === 'Low Stock'
+                          ? 'low-stock'
+                          : 'out-of-stock'
+                      }
+                    >
+                      {item.availabilityStatus}
+                    </p>
 
-                  {addedProducts[item.id] ? (
-                    <p className="item-added">Item added to cart!</p>
-                  ) : (
-                    <div className="front-product">
-                      <button
-                        type="button"
-                        disabled={
-                          item.availabilityStatus !== 'In Stock' &&
-                          item.availabilityStatus !== 'Low Stock'
-                        }
-                        onClick={() => {
-                          addToCart(item);
-                          setAddedProducts((prev) => ({
-                            ...prev,
-                            [item.id]: true,
-                          }));
-                          setTimeout(
-                            () =>
-                              setAddedProducts((prev) => ({
-                                ...prev,
-                                [item.id]: false,
-                              })),
-                            4000
-                          );
+                    <StarRating rating={item.rating} />
+
+                    {addedProducts[item.id] ? (
+                      <p
+                        style={{
+                          width: '100%',
+                          marginBottom: '30px',
+                          fontSize: '24px',
                         }}
+                        className="item-added"
                       >
-                        Add to Cart
-                      </button>
-                    </div>
-                  )}
+                        Item added to cart!
+                      </p>
+                    ) : (
+                      <div className="front-product">
+                        <button
+                          type="button"
+                          disabled={
+                            item.availabilityStatus !== 'In Stock' &&
+                            item.availabilityStatus !== 'Low Stock'
+                          }
+                          onClick={() => {
+                            addToCart(item);
+                            setAddedProducts((prev) => ({
+                              ...prev,
+                              [item.id]: true,
+                            }));
+                            setTimeout(
+                              () =>
+                                setAddedProducts((prev) => ({
+                                  ...prev,
+                                  [item.id]: false,
+                                })),
+                              4000
+                            );
+                          }}
+                        >
+                          Add to Cart
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
