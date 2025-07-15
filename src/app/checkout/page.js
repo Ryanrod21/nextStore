@@ -27,25 +27,28 @@ function Checkout() {
   };
 
   return (
-    <div
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        paddingTop: '200px',
-        width: '100%',
-      }}
-    >
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          gap: '20px',
-        }}
-      ></div>
-
+    <div className="checkout-page">
       <div className="checkout-container">
+        <div className="checkout-price-mobile">
+          <h1 style={{ marginBottom: '0' }}>Items in Cart:</h1>
+          <p style={{ fontSize: '26px', fontWeight: 'bold' }}>{totalItems}</p>
+          <h3 style={{ color: 'black' }}>Total Price:</h3>
+          <p style={{ fontWeight: 'bold', fontSize: '20px' }}>
+            $
+            {totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}
+          </p>
+          {!showThankYou && (
+            <button
+              className="checkout-btn"
+              onClick={handleCheckout}
+              disabled={cartItems.length === 0}
+            >
+              Checkout
+            </button>
+          )}
+          {showThankYou && <div>Thank you for your purchase! </div>}
+        </div>
+
         <div className="checkout-body">
           {cartItems.length === 0 ? (
             <p className="cart-noItems">No items in cart</p>
@@ -63,7 +66,7 @@ function Checkout() {
                   />
                 </Link>
                 <p>{item.title}</p>
-                <p>
+                <p style={{ fontSize: '20px', fontWeight: 'bold' }}>
                   {' '}
                   $
                   {(item.price * item.quantity).toLocaleString(undefined, {
@@ -72,7 +75,7 @@ function Checkout() {
                   })}
                 </p>
                 <div
-                  style={{ display: 'flex', alignItems: 'center', gap: '10px' }}
+                  style={{ display: 'flex', alignItems: 'center', gap: '18px' }}
                 >
                   {item.quantity === 1 ? (
                     <button
@@ -99,7 +102,9 @@ function Checkout() {
                       />
                     </button>
                   )}
-                  <span>{item.quantity}</span>
+                  <span style={{ fontWeight: 'bold', fontSize: '27px' }}>
+                    {item.quantity}
+                  </span>
                   <button
                     id="add-subtract"
                     onClick={() =>
@@ -121,7 +126,7 @@ function Checkout() {
           <h1 style={{ marginBottom: '0' }}>Items in Cart:</h1>
           <p style={{ fontSize: '26px', fontWeight: 'bold' }}>{totalItems}</p>
           <h3 style={{ color: 'black' }}>Total Price:</h3>
-          <p style={{ fontSize: '18px' }}>
+          <p style={{ fontWeight: 'bold', fontSize: '20px' }}>
             $
             {totalPrice.toLocaleString(undefined, { minimumFractionDigits: 2 })}
           </p>
