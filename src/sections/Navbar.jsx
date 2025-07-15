@@ -10,6 +10,8 @@ import Cart from './Cart';
 import { useCart } from '@/app/context/CartContext';
 import { usePathname } from 'next/navigation'; // ✅ Correct for App Router
 import LogoImage from './LogoImg';
+import MobileMenu from '@/components/MobileMenu';
+import MobileSearch from '@/components/MobileSearch';
 
 function NavBar() {
   const [showCart, setShowCart] = useState(false);
@@ -66,6 +68,7 @@ function NavBar() {
 
   return (
     <nav className="navbar">
+      <MobileMenu />
       <div className="logo-links">
         <Link href="/">
           <LogoImage sizes="100px" />
@@ -82,7 +85,6 @@ function NavBar() {
             </li>
 
             <li ref={beautyRef}>
-              {console.log('Current pathname:', pathname)}
               <div
                 role="button"
                 tabIndex={0}
@@ -494,6 +496,7 @@ function NavBar() {
       </div>
       <div className="cart-search">
         <div className="nav-cart">
+          <MobileSearch />
           <SearchBar />
 
           <div className="all-cart">

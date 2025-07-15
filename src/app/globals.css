@@ -5,6 +5,11 @@
   padding: 0;
 }
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 body {
   width: 100%;
   margin: 0 auto;
@@ -23,6 +28,7 @@ body {
   background-color: rgb(8, 122, 8);
   color: white;
   width: 95%;
+  overflow-x: hidden;
 }
 .logo {
   margin: 0;
@@ -60,7 +66,7 @@ body {
   border: 1px solid #ccc;
   border-radius: 20px;
   padding: 0 10px;
-  width: 65%;
+  width: 50%;
   background-color: white;
   width: 500px;
 }
@@ -215,13 +221,14 @@ body {
   align-items: center;
   justify-content: center;
   gap: 40px;
+  width: 25%;
 }
 
 .cart-page {
   position: fixed;
   top: 0;
   right: 0;
-  width: 30%;
+  width: 40%;
   height: 100%;
   background-color: white;
   box-shadow: -2px 0 8px rgba(0, 0, 0, 0.15);
@@ -370,6 +377,7 @@ body {
   gap: 45px;
   justify-content: center;
   align-items: center;
+  width: 100%;
 }
 
 .nav-cart p {
@@ -549,4 +557,93 @@ body {
   text-overflow: ellipsis;
   height: 60px;
   width: 70% !important;
+}
+
+@media (max-width: 1520px) {
+  .nav-link ul {
+    font-size: 16px;
+    padding: 0;
+    gap: 20px;
+  }
+}
+
+@media (max-width: 1315px) {
+  .nav-cart {
+    gap: 30px;
+  }
+  .cart-page {
+    width: 50%;
+  }
+  .search-container {
+    display: none;
+  }
+}
+
+@media (max-width: 1206px) {
+  .search-container {
+    width: 50%;
+  }
+  .nav-cart {
+    gap: 20px;
+  }
+  .nav-link ul {
+    gap: 12px;
+  }
+}
+
+@media (max-width: 1138px) {
+  .nav-link ul {
+    display: none;
+  }
+  .search-container {
+    width: 300px;
+  }
+  .navbar {
+    justify-content: center;
+    gap: 325px;
+    padding-left: 5px;
+    width: 96%;
+  }
+}
+
+@media (max-width: 1080px) {
+  .navbar {
+    gap: 250px;
+  }
+}
+
+@media (max-width: 860px) {
+  .navbar {
+    gap: 200px;
+  }
+  .cart-page {
+    width: 80%;
+  }
+}
+@media (max-width: 860px) {
+  .navbar {
+    gap: 200px;
+  }
+}
+
+@media (max-width: 750px) {
+  .navbar {
+    gap: 150px;
+  }
+}
+
+@media (max-width: 620px) {
+  .cart-page {
+    width: 100%;
+  }
+
+  .navbar {
+    gap: 120px;
+  }
+}
+
+@media (max-width: 376px) {
+  .navbar {
+    gap: 40px;
+  }
 }

@@ -29,3 +29,267 @@
 .search-container .star-icon {
   font-size: 13px;
 }
+
+.mobile-menu-container {
+  position: relative;
+  z-index: 50;
+}
+
+/* Hamburger icon */
+.mobile-menu-hamburger {
+  color: black;
+  padding: 1rem;
+  cursor: pointer;
+  display: none;
+}
+
+/* Sidebar */
+.mobile-menu-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 16rem; /* 64 * 0.25rem = 16rem */
+  background-color: white;
+  color: black;
+  box-shadow: 2px 0 8px rgba(0, 0, 0, 0.15);
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.mobile-menu-open {
+  transform: translateX(0);
+}
+
+.mobile-menu-closed {
+  transform: translateX(-100%);
+}
+
+/* Header */
+.mobile-menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #d1d5db; /* gray-300 */
+}
+
+.mobile-menu-title {
+  font-size: 1.125rem; /* text-lg */
+  font-weight: 700;
+}
+
+.mobile-menu-close-icon {
+  cursor: pointer;
+  color: black;
+}
+
+/* Category List */
+.mobile-menu-category-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.mobile-menu-category-item {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb; /* gray-200 */
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  user-select: none;
+}
+
+.mobile-menu-category-item:hover {
+  background-color: #f3f4f6; /* gray-100 */
+}
+
+/* Hide elements utility */
+.hidden {
+  display: none !important;
+}
+
+/* Subcategory List */
+.mobile-menu-subcategory-list {
+  padding: 0 0 1rem 0;
+}
+
+.mobile-menu-back-button {
+  display: block;
+  background: none;
+  border: none;
+  color: #16a34a; /* green-600 */
+  padding: 1rem;
+  font-size: 0.875rem; /* text-sm */
+  cursor: pointer;
+  user-select: none;
+}
+
+.mobile-menu-back-button:hover {
+  text-decoration: underline;
+}
+
+.mobile-menu-subcategory-item {
+  padding: 1rem;
+  border-bottom: 1px solid #e5e7eb; /* gray-200 */
+}
+
+.mobile-menu-subcategory-item a {
+  color: inherit;
+  text-decoration: none;
+  display: block;
+}
+
+.mobile-menu-subcategory-item a:hover {
+  text-decoration: underline;
+}
+
+/* FOR MOBILE SEARCH  */
+/*  */
+/* 
+ */
+
+.mobile-search-wrapper {
+  position: relative;
+  z-index: 50;
+}
+
+.mobile-search-icon {
+  cursor: pointer;
+  padding: 1rem;
+  color: black;
+  display: none;
+}
+
+.mobile-search-panel {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 40%;
+  height: 100vh;
+  background: white;
+  box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+  padding: 1rem;
+  overflow-y: auto;
+  z-index: 100;
+  color: black;
+}
+
+.mobile-search-panel.open {
+  transform: translateX(0);
+}
+
+.mobile-search-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.mobile-search-header h2 {
+  font-size: 25px;
+}
+
+.mobile-search-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.mobile-search-close-icon {
+  cursor: pointer;
+}
+
+.mobile-search-input {
+  width: 100%;
+  padding: 12px 0;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.mobile-search-loading,
+.mobile-search-error,
+.mobile-search-no-results {
+  padding: 1rem;
+  text-align: center;
+  color: #666;
+}
+
+/* Results */
+.mobile-search-dropdown-list {
+  list-style: none;
+  padding: 0;
+}
+
+.mobile-search-dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0.75rem;
+  border-bottom: 1px solid #eee;
+  cursor: pointer;
+}
+
+.mobile-search-thumbnail {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.mobile-close-panel-button {
+  margin-top: 2rem;
+  padding: 0.75rem 1.5rem;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 1rem;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.mobile-close-panel-button:hover {
+  background-color: #dc2626;
+}
+
+@media (max-width: 1315px) {
+  .featured-item {
+    height: 185px;
+    width: 75%;
+  }
+
+  .mobile-search-icon {
+    display: block;
+  }
+
+  .featured-item .product img {
+    width: 65px;
+    height: 65px;
+  }
+
+  .star-icon {
+    font-size: 11px;
+  }
+
+  .featured-item h2 {
+    font-size: 21px;
+  }
+}
+
+@media (max-width: 1138px) {
+  .mobile-menu-hamburger {
+    display: block;
+  }
+
+  .featured-item h2 {
+    font-size: 16px;
+  }
+}
