@@ -93,26 +93,30 @@ function MainHero() {
         <div className="featured-container">
           <div className="featured-item">
             <h2>Highly Rated Items:</h2>
-            {product
-              .filter((item) => item.rating && typeof item.rating === 'number')
-              .sort((a, b) => b.rating - a.rating)
-              .slice(0, 3)
-              .map((item) => (
-                <div className="product" key={item.id}>
-                  <Link href={`/product/${item.id}`}>
-                    <Image
-                      src={item.images[0]}
-                      alt={item.title}
-                      width={400}
-                      height={400}
-                      style={{ objectFit: 'contain' }}
-                      unoptimized
-                    />
-                  </Link>
-                  <p>{item.title}</p>
-                  <StarRating rating={item.rating} />
-                </div>
-              ))}
+            <div className="all-feat-product">
+              {product
+                .filter(
+                  (item) => item.rating && typeof item.rating === 'number'
+                )
+                .sort((a, b) => b.rating - a.rating)
+                .slice(0, 3)
+                .map((item) => (
+                  <div className="product" key={item.id}>
+                    <Link href={`/product/${item.id}`}>
+                      <Image
+                        src={item.images[0]}
+                        alt={item.title}
+                        width={400}
+                        height={400}
+                        style={{ objectFit: 'contain' }}
+                        unoptimized
+                      />
+                    </Link>
+                    <p>{item.title}</p>
+                    <StarRating rating={item.rating} />
+                  </div>
+                ))}
+            </div>
           </div>
         </div>
 
@@ -163,7 +167,7 @@ function MainHero() {
                       >
                         {items.title}
                       </p>
-                      <p style={{ fontWeight: 'bold' }}>
+                      <p style={{ fontWeight: 'bold', fontSize: '20px' }}>
                         $
                         {items.price.toLocaleString(undefined, {
                           minimumFractionDigits: 2,
