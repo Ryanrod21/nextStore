@@ -66,7 +66,6 @@ export default function MobileSearch() {
 
   return (
     <div className="mobile-search-wrapper">
-      {/* Search Icon */}
       <FontAwesomeIcon
         icon={faMagnifyingGlass}
         size="lg"
@@ -74,7 +73,6 @@ export default function MobileSearch() {
         onClick={() => setIsSearchOpen(true)}
       />
 
-      {/* Slide-in Panel */}
       <div
         ref={dropdownRef}
         className={`mobile-search-panel ${isSearchOpen ? 'open' : ''}`}

@@ -26,7 +26,6 @@ export default function MobileMenu() {
 
   return (
     <div className="mobile-menu-container">
-      {/* Hamburger Button */}
       <FontAwesomeIcon
         icon={faBars}
         size="xl"
@@ -34,7 +33,6 @@ export default function MobileMenu() {
         className="mobile-menu-hamburger"
       />
 
-      {/* Slide-in Sidebar */}
       <div
         className={`mobile-menu-sidebar ${
           isMenuOpen ? 'mobile-menu-open' : 'mobile-menu-closed'
@@ -54,7 +52,6 @@ export default function MobileMenu() {
           />
         </div>
 
-        {/* Category List */}
         <ul
           className={`mobile-menu-category-list ${
             selectedCategory ? 'hidden' : ''
@@ -71,7 +68,6 @@ export default function MobileMenu() {
           ))}
         </ul>
 
-        {/* Subcategory List */}
         <div
           className={`mobile-menu-subcategory-list ${
             selectedCategory ? '' : 'hidden'
