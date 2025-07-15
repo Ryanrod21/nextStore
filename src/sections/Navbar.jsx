@@ -482,7 +482,7 @@ function NavBar() {
                   </li>
                   <li>
                     <Link
-                      href="/category/sport-accessories_glasses"
+                      href="/category/all-accessories"
                       onClick={() => setDropdownOpen(false)}
                     >
                       All Accessories

@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars, faTimes } from '@fortawesome/free-solid-svg-icons';
 
 const categories = {
+  groceries: [{ name: 'Groceries', path: '/category/groceries' }],
   beauty: [
     { name: 'Beauty', path: '/category/beauty' },
     { name: 'Skin Care', path: '/category/skin-care' },
@@ -17,6 +18,40 @@ const categories = {
     { name: 'Shirts', path: '/category/mens-shirts' },
     { name: 'Watches', path: '/category/mens-watches' },
     { name: 'All Fashion', path: '/category/mens-fashion' },
+  ],
+  homeEssentials: [
+    { name: 'Furniture', path: '/category/furniture' },
+    { name: 'Home Decoration', path: '/category/home-decoration' },
+    { name: 'Kitchen Accessories', path: '/category/kitchen-accessories' },
+    { name: 'All Furniture', path: '/category/all-furniture' },
+  ],
+  electronics: [
+    { name: 'laptops', path: '/category/laptops' },
+    { name: 'Mobile Accessories', path: '/category/mobile-accessories' },
+    { name: 'Smartphones', path: '/category/smartphones' },
+    { name: 'All Electornics', path: '/category/all-electronics' },
+  ],
+  womanFashion: [
+    { name: 'Dresses', path: '/category/dresses' },
+    { name: 'Women Bags', path: '/category/womens-bags' },
+    { name: 'Women Jewellery', path: '/category/womens-jewellery' },
+    { name: 'Women Shoes', path: '/category/womens-shoes' },
+    { name: 'Women Watches', path: '/category/womens-watches' },
+    { name: 'Women Tops', path: '/category/tops' },
+    { name: 'All Women Fashion', path: '/category/womens-fashion' },
+  ],
+  vehicles: [
+    { name: 'Motorcycle', path: '/category/motorcylce' },
+    { name: 'Vehicles', path: '/category/vehicles' },
+    { name: 'All Vehicles', path: '/category/all-vehicles' },
+  ],
+  accessories: [
+    { name: 'Sunglasses', path: '/category/sunglasses' },
+    { name: 'Sports Accessories', path: '/category/sports-accessories' },
+    {
+      name: 'All Accessories',
+      path: '/category/all-accessories',
+    },
   ],
 };
 
@@ -38,7 +73,6 @@ export default function MobileMenu() {
           isMenuOpen ? 'mobile-menu-open' : 'mobile-menu-closed'
         }`}
       >
-        {/* Header */}
         <div className="mobile-menu-header">
           <h2 className="mobile-menu-title">Menu</h2>
           <FontAwesomeIcon

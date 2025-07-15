@@ -27,7 +27,7 @@ const categorySlugMap = {
     'tablets',
   ],
   'all-furniture': ['furniture', 'home-decoration', 'kitchen-accessories'],
-  'sport-accessories_glasses': ['sunglasses', 'sports-accessories'],
+  'all-accessories': ['sunglasses', 'sports-accessories'],
   'all-beauty': ['beauty', 'skin-care', 'fragrances'],
   'all-vehicles': ['motorcycle', 'vehicle'],
 };
@@ -38,7 +38,7 @@ const categoryTitleMap = {
   'mens-fashion': "Men's Fashion",
   'all-electronics': 'All Electronics',
   'all-furniture': 'All Furntiure',
-  'sport-accessories_glasses': 'All Accessories',
+  'all-accessories': 'All Accessories',
   'all-beauty': 'All Beauty',
   'all-vehicles': 'All Vehicle',
 };
