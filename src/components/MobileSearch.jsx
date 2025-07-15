@@ -79,6 +79,12 @@ export default function MobileSearch() {
       >
         <div className="mobile-search-header">
           <h2 className="mobile-search-title">Search</h2>
+          <FontAwesomeIcon
+            icon={faTimes}
+            size="lg"
+            className="mobile-search-close-icon"
+            onClick={() => setIsSearchOpen(false)}
+          />
         </div>
 
         <input

@@ -634,11 +634,6 @@ body {
     width: 80%;
   }
 }
-@media (max-width: 860px) {
-  .navbar {
-    gap: 200px;
-  }
-}
 
 @media (max-width: 750px) {
   .navbar {
@@ -656,8 +651,37 @@ body {
   }
 }
 
+@media (max-width: 490px) {
+  .navbar {
+    gap: 50px;
+  }
+
+  .product-sub-box h1 {
+    text-align: center;
+  }
+
+  .row {
+    flex-wrap: wrap;
+  }
+
+  .product {
+    width: 45%;
+    margin-bottom: 20px;
+  }
+  .product img {
+    width: 170px;
+    height: 170px;
+  }
+}
+
 @media (max-width: 376px) {
   .navbar {
-    gap: 40px;
+    gap: 30px;
+  }
+}
+
+@media (max-width: 326px) {
+  .navbar {
+    gap: 20px;
   }
 }
