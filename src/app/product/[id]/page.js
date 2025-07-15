@@ -148,6 +148,7 @@ function ProductPage() {
 
           {/* 2️⃣ Add quantity selector */}
           <div
+            className="add-sub-container"
             style={{
               display: 'flex',
               alignItems: 'center',

@@ -626,12 +626,34 @@ body {
   }
 }
 
+@media (max-width: 950px) {
+  .product-sub-box h1 {
+    text-align: center;
+  }
+
+  .row {
+    flex-wrap: wrap;
+  }
+
+  .product {
+    width: 45%;
+    margin-bottom: 20px;
+  }
+  .product img {
+    width: 230px;
+    height: 230px;
+  }
+}
+
 @media (max-width: 860px) {
   .navbar {
     gap: 200px;
   }
   .cart-page {
     width: 80%;
+  }
+  .product-img-container {
+    flex-direction: column;
   }
 }
 
@@ -677,6 +699,10 @@ body {
 @media (max-width: 376px) {
   .navbar {
     gap: 30px;
+  }
+
+  .product-img-container {
+    flex-direction: column;
   }
 }
 
