@@ -77,8 +77,6 @@ export default function CategoryPage() {
       try {
         const allProducts = [];
 
-        console.log(allProducts);
-
         for (const cat of categories) {
           const data = await getCategoryProducts(cat);
           if (data?.products) {

@@ -32,7 +32,6 @@ function ProductPage() {
     async function fetchProduct() {
       try {
         const data = await getProduct(id);
-        console.log(data);
         setProduct(data);
       } catch (error) {
         console.error('Error loading product:', error);
