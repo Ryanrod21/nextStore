@@ -68,7 +68,6 @@ function NavBar() {
 
   return (
     <nav className="navbar">
-      <MobileMenu />
       <div className="logo-links">
         <Link href="/">
           <LogoImage sizes="100px" />
@@ -517,6 +516,7 @@ function NavBar() {
           {showCart && (
             <div className="cart-overlay" onClick={toggleCart}></div>
           )}
+          <MobileMenu />
         </div>
       </div>
     </nav>

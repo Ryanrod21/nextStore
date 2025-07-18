@@ -33,6 +33,7 @@
 .mobile-menu-container {
   position: relative;
   z-index: 50;
+  display: none;
 }
 
 /* Hamburger icon */
@@ -290,6 +291,10 @@
 }
 
 @media (max-width: 1138px) {
+  .mobile-menu-container {
+    display: block;
+  }
+
   .mobile-menu-hamburger {
     display: block;
   }
@@ -306,6 +311,10 @@
 }
 
 @media (max-width: 620px) {
+  .mobile-menu-container {
+    display: block;
+  }
+
   .featured-item {
     width: 40%;
   }
