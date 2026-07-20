@@ -7,7 +7,6 @@ export default function Home() {
     <>
       <div className="main-container">
         <div className="page-content">
-          <WelcomeModal />
           <Hero />
           <MainHero />
         </div>
