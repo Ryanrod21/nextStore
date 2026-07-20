@@ -76,7 +76,7 @@ export default function CategoryPage() {
         .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
         .join(' ')
     );
-  }, [categoryParam, categories]);
+  }, [categoryParam]);
 
   const emoji = categoryEmojiMap[categoryParam] || '🏷️';
 

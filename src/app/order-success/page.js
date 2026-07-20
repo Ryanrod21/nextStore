@@ -24,10 +24,10 @@ export default function OrderSuccess() {
         {/* MAIN MESSAGE */}
         <div className="success-card success-card--main">
           <div className="success-icon">📦</div>
-          <h2 className="success-card-title">We've received your order</h2>
+          <h2 className="success-card-title">We&apos;ve received your order</h2>
           <p className="success-card-text">
-            Your order has been confirmed and is being prepared. We'll send you
-            an update as soon as it's on its way.
+            Your order has been confirmed and is being prepared. We&apos;ll send
+            you an update as soon as it&apos;s on its way.
           </p>
         </div>
 
@@ -37,7 +37,9 @@ export default function OrderSuccess() {
             <div className="success-step-icon">✓</div>
             <div className="success-step-info">
               <div className="success-step-label">Order confirmed</div>
-              <div className="success-step-sub">We've received your order</div>
+              <div className="success-step-sub">
+                We&apos;ve received your order
+              </div>
             </div>
           </div>
 
@@ -88,7 +90,8 @@ export default function OrderSuccess() {
             <div className="success-info-icon">🔔</div>
             <div className="success-info-title">Order updates</div>
             <div className="success-info-text">
-              We'll let you know when your order is ready and out for delivery.
+              We&apos;ll let you know when your order is ready and out for
+              delivery.
             </div>
           </div>
           <div className="success-info-card">
