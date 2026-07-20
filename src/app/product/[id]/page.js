@@ -14,18 +14,14 @@ function ProductPage() {
   const [quantity, setQuantity] = useState(1);
   const [added, setAdded] = useState(false);
   const [activeImageIndex, setActiveImageIndex] = useState(0);
-
   const [transformOrigin, setTransformOrigin] = useState('center center');
   const [isZoomed, setIsZoomed] = useState(false);
 
   const pathname = usePathname();
   const pathSegments = pathname.split('/').filter(Boolean);
-
   const router = useRouter();
-
   const params = useParams();
   const id = params.id;
-
   const { addToCart } = useCart();
 
   useEffect(() => {
@@ -37,19 +33,13 @@ function ProductPage() {
         console.error('Error loading product:', error);
       }
     }
-
-    if (id) {
-      fetchProduct();
-    }
+    if (id) fetchProduct();
   }, [id]);
 
   function handleMouseMove(e) {
     const rect = e.currentTarget.getBoundingClientRect();
-
-    // Calculate cursor position as percentage inside container
     const x = ((e.clientX - rect.left) / rect.width) * 100;
     const y = ((e.clientY - rect.top) / rect.height) * 100;
-
     setTransformOrigin(`${x}% ${y}%`);
   }
 
@@ -69,18 +59,21 @@ function ProductPage() {
       .replace(/\s+/g, '-');
   }
 
-  if (!product) return <p>Loading...</p>;
+  if (!product)
+    return <p style={{ padding: '40px', color: '#888' }}>Loading...</p>;
 
   return (
     <div className="item-page">
       <div className="breadcrumbs">
         <Breadcrumbs pathArray={breadcrumbSegments} product={product} />
       </div>
+
       <div className="product-img-container">
+        {/* ── LEFT: IMAGES ── */}
         <div className="side-img">
           <div className="main-img-contain">
             <div
-              className="main-img-contain zoom-container"
+              className="zoom-container"
               onMouseMove={handleMouseMove}
               onMouseLeave={handleMouseLeave}
               onMouseEnter={handleMouseEnter}
@@ -95,7 +88,7 @@ function ProductPage() {
                   transformOrigin,
                   transform: isZoomed ? 'scale(1.5)' : 'scale(1)',
                 }}
-                unoptimized={true} // optional, if src is external and not in next.config.js domains
+                unoptimized
               />
             </div>
           </div>
@@ -107,10 +100,8 @@ function ProductPage() {
                 key={index}
                 onClick={() => setActiveImageIndex(index)}
                 style={{
-                  border:
-                    activeImageIndex === index
-                      ? '2px solid black'
-                      : '1px solid #ccc',
+                  borderColor:
+                    activeImageIndex === index ? '#0d0d0d' : 'transparent',
                 }}
               >
                 <Image
@@ -118,23 +109,24 @@ function ProductPage() {
                   alt={`Thumbnail ${index + 1}`}
                   fill
                   style={{ objectFit: 'cover' }}
-                  unoptimized // add this if the images are from external URLs and you don't want to configure domains
-                  sizes="100px"
-                  priority={activeImageIndex === index} // prioritize loading active thumbnail
+                  unoptimized
+                  sizes="80px"
+                  priority={activeImageIndex === index}
                 />
               </div>
             ))}
           </div>
         </div>
+
+        {/* ── RIGHT: DETAILS ── */}
         <div className="product-details">
           <div className="product-head">
             <h1>{product.title}</h1>
             <p>{product.description}</p>
             <StarRating rating={product.rating} />
-            <span style={{ fontWeight: '600' }}>
-              {product.rating.toFixed(2)} / 5
-            </span>
+            <span>{product.rating.toFixed(2)} / 5</span>
           </div>
+
           <div className="info">
             <p className="price">
               $
@@ -145,20 +137,9 @@ function ProductPage() {
             </p>
           </div>
 
-          {/* 2️⃣ Add quantity selector */}
-          <div
-            className="add-sub-container"
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: '10px',
-              margin: '20px 0',
-            }}
-          >
-            <label htmlFor="quantity" style={{ marginRight: '10px' }}>
-              Quantity:
-            </label>
-
+          {/* ── QUANTITY ── */}
+          <div className="add-sub-container">
+            <label htmlFor="quantity">Quantity:</label>
             <button
               id="add-subtract"
               onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -166,9 +147,7 @@ function ProductPage() {
             >
               −
             </button>
-
             <span>{quantity}</span>
-
             <button
               id="add-subtract"
               onClick={() => setQuantity(Math.min(15, quantity + 1))}
@@ -178,12 +157,11 @@ function ProductPage() {
             </button>
           </div>
 
+          {/* ── ADD TO CART / BUY NOW ── */}
           {added ? (
-            <>
-              <p className="item-added">Item added to cart!</p>
-            </>
+            <p className="item-added">✓ Added to cart</p>
           ) : (
-            <div style={{ display: 'flex', gap: '10px' }}>
+            <div style={{ display: 'flex', gap: '12px' }}>
               <button
                 disabled={
                   product.availabilityStatus !== 'In Stock' &&
@@ -197,7 +175,7 @@ function ProductPage() {
                   setTimeout(() => setAdded(false), 4000);
                 }}
               >
-                Add to Cart
+                Add to cart
               </button>
 
               <button
@@ -211,48 +189,48 @@ function ProductPage() {
                   router.push('/checkout');
                 }}
               >
-                Buy Now
+                Buy now
               </button>
             </div>
           )}
 
-          <h4>Shipping Information:</h4>
+          {/* ── SHIPPING ── */}
+          <h4>Shipping information</h4>
           <p>{product.shippingInformation}</p>
 
+          {/* ── TAGS ── */}
           <div className="item-tags">
-            <h4>Tags:</h4>
-            <div style={{ display: 'flex', gap: '5px' }}>
-              {product.tags &&
-                product.tags.map((tag, index) => (
-                  <div key={index}>
-                    <p>
-                      {tag
-                        .split(' ')
-                        .map(
-                          (word) => word.charAt(0).toUpperCase() + word.slice(1)
-                        )
-                        .join(' ')}
-                      {index < product.tags.length - 1 ? ',' : ''}
-                    </p>
-                  </div>
-                ))}
-            </div>
+            <h4>Tags</h4>
+            {product.tags &&
+              product.tags.map((tag, index) => (
+                <p key={index}>
+                  {tag
+                    .split(' ')
+                    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+                    .join(' ')}
+                </p>
+              ))}
           </div>
+
+          {/* ── STOCK STATUS ── */}
           <p
             className={
               product.availabilityStatus === 'In Stock'
                 ? 'in-stock'
                 : product.availabilityStatus === 'Low Stock'
-                ? 'low-stock'
-                : 'out-of-stock'
+                  ? 'low-stock'
+                  : 'out-of-stock'
             }
+            style={{ marginTop: '16px' }}
           >
             {product.availabilityStatus}
           </p>
         </div>
       </div>
+
+      {/* ── REVIEWS ── */}
       <div className="review-container">
-        <h2>Reviews:</h2>
+        <h2>Reviews</h2>
         <div className="reviews">
           {product.reviews &&
             product.reviews.map((feedback, index) => (

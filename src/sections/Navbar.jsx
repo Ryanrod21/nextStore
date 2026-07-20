@@ -1,21 +1,21 @@
 'use client';
 
 import SearchBar from '../components/SearchBar';
-import '../app/globals.css';
+import '../app/nav.css';
 import Link from 'next/link';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCartShopping } from '@fortawesome/free-solid-svg-icons';
 import { useState, useRef, useEffect } from 'react';
 import Cart from './Cart';
 import { useCart } from '@/app/context/CartContext';
-import { usePathname } from 'next/navigation'; // ✅ Correct for App Router
+import { usePathname } from 'next/navigation';
 import LogoImage from './LogoImg';
 import MobileMenu from '@/components/MobileMenu';
 import MobileSearch from '@/components/MobileSearch';
 
 function NavBar() {
   const [showCart, setShowCart] = useState(false);
-  const [openDropdown, setOpenDropdown] = useState(null); // null or a key like 'beauty', 'fashion', etc.
+  const [openDropdown, setOpenDropdown] = useState(null);
   const { cartItems } = useCart();
   const pathname = usePathname();
 
@@ -40,38 +40,29 @@ function NavBar() {
         vehiclesRef,
         accessoriesRef,
       ];
-
       const clickedOutsideAll = refs.every(
-        (ref) => ref.current && !ref.current.contains(event.target)
+        (ref) => ref.current && !ref.current.contains(event.target),
       );
-
-      if (clickedOutsideAll) {
-        setOpenDropdown(null);
-      }
+      if (clickedOutsideAll) setOpenDropdown(null);
     };
-
     document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
+    return () => document.removeEventListener('mousedown', handleClickOutside);
   }, []);
 
   const totalItems = cartItems.reduce((sum, item) => sum + item.quantity, 0);
-
-  const toggleCart = () => {
-    setShowCart((prev) => !prev);
-  };
-
-  const handleDropdownToggle = (key) => {
+  const toggleCart = () => setShowCart((prev) => !prev);
+  const handleDropdownToggle = (key) =>
     setOpenDropdown((prev) => (prev === key ? null : key));
-  };
 
   return (
     <nav className="navbar">
+      {/* ── BRAND ── */}
       <div className="logo-links">
-        <Link href="/">
-          <LogoImage sizes="100px" />
+        <Link href="/" className="nav-brand-link">
+          <span className="logo">Simple Supplies</span>
         </Link>
+
+        {/* ── NAV LINKS ── */}
         <div className="nav-link">
           <ul>
             <li>
@@ -83,31 +74,24 @@ function NavBar() {
               </Link>
             </li>
 
-            <li ref={beautyRef}>
+            <li ref={beautyRef} className="nav-dropdown-toggle">
               <div
                 role="button"
                 tabIndex={0}
-                className={
-                  isActive([
-                    '/category/beauty',
-                    '/category/skin-care',
-                    '/category/fragrances',
-                    '/category/all-beauty',
-                  ])
-                    ? 'active'
-                    : ''
-                }
-                style={{ cursor: 'pointer' }}
+                className={`nav-drop-trigger ${isActive(['/category/beauty', '/category/skin-care', '/category/fragrances', '/category/all-beauty']) ? 'active' : ''}`}
                 onClick={() => handleDropdownToggle('beauty')}
               >
-                Beauty
+                Beauty{' '}
+                <span className="drop-arrow">
+                  {openDropdown === 'beauty' ? '▴' : '▾'}
+                </span>
               </div>
-              {openDropdown == 'beauty' && (
+              {openDropdown === 'beauty' && (
                 <ul className="nav-dropdown-menu">
                   <li className="nav-cat-li">
                     <Link
                       href="/category/beauty"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
                       Beauty
                     </Link>
@@ -115,15 +99,15 @@ function NavBar() {
                   <li className="nav-cat-li">
                     <Link
                       href="/category/skin-care"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      Skin Care
+                      Skin care
                     </Link>
                   </li>
                   <li className="nav-cat-li">
                     <Link
                       href="/category/fragrances"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
                       Fragrances
                     </Link>
@@ -131,154 +115,133 @@ function NavBar() {
                   <li className="nav-cat-li">
                     <Link
                       href="/category/all-beauty"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      All Beauty
+                      All beauty
                     </Link>
                   </li>
                 </ul>
               )}
             </li>
 
-            <li ref={mensFashionRef}>
+            <li ref={mensFashionRef} className="nav-dropdown-toggle">
               <div
                 role="button"
                 tabIndex={0}
-                className={
-                  isActive([
-                    '/category/watches',
-                    '/category/mens-shirts',
-                    '/category/mens-shoes',
-                    '/category/all-fashion',
-                  ])
-                    ? 'active'
-                    : ''
-                }
-                style={{ cursor: 'pointer' }}
+                className={`nav-drop-trigger ${isActive(['/category/watches', '/category/mens-shirts', '/category/mens-shoes', '/category/all-fashion']) ? 'active' : ''}`}
                 onClick={() => handleDropdownToggle('mens-fashion')}
               >
-                Men's Fashion
+                Men's fashion{' '}
+                <span className="drop-arrow">
+                  {openDropdown === 'mens-fashion' ? '▴' : '▾'}
+                </span>
               </div>
               {openDropdown === 'mens-fashion' && (
                 <ul className="nav-dropdown-menu">
                   <li className="nav-cat-li">
                     <Link
                       href="/category/mens-shoes"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      Shoes{' '}
+                      Shoes
                     </Link>
                   </li>
                   <li className="nav-cat-li">
                     <Link
                       href="/category/mens-shirts"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      Mens Shirts
+                      Shirts
                     </Link>
                   </li>
                   <li className="nav-cat-li">
                     <Link
                       href="/category/mens-watches"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      Mens Watches
+                      Watches
                     </Link>
                   </li>
                   <li className="nav-cat-li">
                     <Link
                       href="/category/mens-fashion"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      All Mens Fashion
+                      All men's fashion
                     </Link>
                   </li>
                 </ul>
               )}
             </li>
 
-            <li ref={homeEssentialsRef}>
+            <li ref={homeEssentialsRef} className="nav-dropdown-toggle">
               <div
                 role="button"
                 tabIndex={0}
-                className={
-                  isActive([
-                    '/category/furniture',
-                    '/category/home-decoration',
-                    '/category/kitchen-accessories',
-                    '/category/all-furniture',
-                  ])
-                    ? 'active'
-                    : ''
-                }
-                style={{ cursor: 'pointer' }}
+                className={`nav-drop-trigger ${isActive(['/category/furniture', '/category/home-decoration', '/category/kitchen-accessories', '/category/all-furniture']) ? 'active' : ''}`}
                 onClick={() => handleDropdownToggle('home-essentials')}
               >
-                Home Essentials
+                Home essentials{' '}
+                <span className="drop-arrow">
+                  {openDropdown === 'home-essentials' ? '▴' : '▾'}
+                </span>
               </div>
               {openDropdown === 'home-essentials' && (
                 <ul className="nav-dropdown-menu">
                   <li className="nav-cat-li">
                     <Link
                       href="/category/furniture"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      Furniture{' '}
+                      Furniture
                     </Link>
                   </li>
                   <li className="nav-cat-li">
                     <Link
                       href="/category/home-decoration"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      Home Decoration
+                      Home decoration
                     </Link>
                   </li>
                   <li className="nav-cat-li">
                     <Link
                       href="/category/kitchen-accessories"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      Kitchen Accessories
+                      Kitchen accessories
                     </Link>
                   </li>
                   <li className="nav-cat-li">
                     <Link
                       href="/category/all-furniture"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      All Furniture
+                      All home essentials
                     </Link>
                   </li>
                 </ul>
               )}
             </li>
 
-            <li ref={electronicRef}>
+            <li ref={electronicRef} className="nav-dropdown-toggle">
               <div
                 role="button"
                 tabIndex={0}
-                className={
-                  isActive([
-                    '/category/laptops',
-                    '/category/mobile-accessories',
-                    '/category/smartphones',
-                    '/category/all-electornics',
-                  ])
-                    ? 'active'
-                    : ''
-                }
-                style={{ cursor: 'pointer' }}
+                className={`nav-drop-trigger ${isActive(['/category/laptops', '/category/mobile-accessories', '/category/smartphones', '/category/all-electronics']) ? 'active' : ''}`}
                 onClick={() => handleDropdownToggle('electronics')}
               >
-                Electronics
+                Electronics{' '}
+                <span className="drop-arrow">
+                  {openDropdown === 'electronics' ? '▴' : '▾'}
+                </span>
               </div>
               {openDropdown === 'electronics' && (
                 <ul className="nav-dropdown-menu">
                   <li className="nav-cat-li">
                     <Link
                       href="/category/laptops"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
                       Laptops
                     </Link>
@@ -286,15 +249,15 @@ function NavBar() {
                   <li className="nav-cat-li">
                     <Link
                       href="/category/mobile-accessories"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      Mobile Accessories
+                      Mobile accessories
                     </Link>
                   </li>
                   <li className="nav-cat-li">
                     <Link
                       href="/category/smartphones"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
                       Smartphones
                     </Link>
@@ -302,123 +265,107 @@ function NavBar() {
                   <li className="nav-cat-li">
                     <Link
                       href="/category/all-electronics"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      All Electronics
+                      All electronics
                     </Link>
                   </li>
                 </ul>
               )}
             </li>
 
-            <li ref={womensFashionRef}>
+            <li ref={womensFashionRef} className="nav-dropdown-toggle">
               <div
                 role="button"
                 tabIndex={0}
-                className={
-                  isActive([
-                    '/category/womens-dresses',
-                    '/category/womens-bags',
-                    '/category/womens-jewellery',
-                    '/category/womens-shoes',
-                    '/category/womens-watches',
-                    '/category/tops',
-                    '/category/womens-fashion',
-                  ])
-                    ? 'active'
-                    : ''
-                }
-                style={{ cursor: 'pointer' }}
+                className={`nav-drop-trigger ${isActive(['/category/womens-dresses', '/category/womens-bags', '/category/womens-jewellery', '/category/womens-shoes', '/category/womens-watches', '/category/tops', '/category/womens-fashion']) ? 'active' : ''}`}
                 onClick={() => handleDropdownToggle('womens-fashion')}
               >
-                Womens Fashion
+                Women's fashion{' '}
+                <span className="drop-arrow">
+                  {openDropdown === 'womens-fashion' ? '▴' : '▾'}
+                </span>
               </div>
               {openDropdown === 'womens-fashion' && (
                 <ul className="nav-dropdown-menu">
                   <li className="nav-cat-li">
                     <Link
                       href="/category/womens-dresses"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      Womens Dresses
+                      Dresses
                     </Link>
                   </li>
                   <li className="nav-cat-li">
                     <Link
                       href="/category/womens-bags"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      Womens Bags
+                      Bags
                     </Link>
                   </li>
                   <li className="nav-cat-li">
                     <Link
                       href="/category/womens-jewellery"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      Womens Jewellery
+                      Jewellery
                     </Link>
                   </li>
                   <li className="nav-cat-li">
                     <Link
                       href="/category/womens-shoes"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      Womens Shoes
+                      Shoes
                     </Link>
                   </li>
                   <li className="nav-cat-li">
                     <Link
                       href="/category/womens-watches"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      Womens Watches
+                      Watches
                     </Link>
                   </li>
                   <li className="nav-cat-li">
                     <Link
                       href="/category/tops"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      Womens Tops
+                      Tops
                     </Link>
                   </li>
                   <li className="nav-cat-li">
                     <Link
                       href="/category/womens-fashion"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      All Womens Fashion
+                      All women's fashion
                     </Link>
                   </li>
                 </ul>
               )}
             </li>
 
-            <li ref={vehiclesRef}>
+            <li ref={vehiclesRef} className="nav-dropdown-toggle">
               <div
                 role="button"
                 tabIndex={0}
-                className={
-                  isActive([
-                    '/category/motorcycle',
-                    '/category/vehicle',
-                    '/category/all-vehicle',
-                  ])
-                    ? 'active'
-                    : ''
-                }
-                style={{ cursor: 'pointer' }}
+                className={`nav-drop-trigger ${isActive(['/category/motorcycle', '/category/vehicle', '/category/all-vehicle']) ? 'active' : ''}`}
                 onClick={() => handleDropdownToggle('vehicles')}
               >
-                Vehicles
+                Vehicles{' '}
+                <span className="drop-arrow">
+                  {openDropdown === 'vehicles' ? '▴' : '▾'}
+                </span>
               </div>
               {openDropdown === 'vehicles' && (
                 <ul className="nav-dropdown-menu">
                   <li className="nav-cat-li">
                     <Link
                       href="/category/motorcycle"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
                       Motorcycle
                     </Link>
@@ -426,7 +373,7 @@ function NavBar() {
                   <li className="nav-cat-li">
                     <Link
                       href="/category/vehicle"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
                       Vehicles
                     </Link>
@@ -434,39 +381,33 @@ function NavBar() {
                   <li className="nav-cat-li">
                     <Link
                       href="/category/all-vehicles"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      All Vehicles
+                      All vehicles
                     </Link>
                   </li>
                 </ul>
               )}
             </li>
 
-            <li ref={accessoriesRef}>
+            <li ref={accessoriesRef} className="nav-dropdown-toggle">
               <div
                 role="button"
                 tabIndex={0}
-                className={
-                  isActive([
-                    '/category/sunglasses',
-                    '/category/sports-accessories',
-                    '/category/sport-accessories_glasses',
-                  ])
-                    ? 'active'
-                    : ''
-                }
-                style={{ cursor: 'pointer' }}
+                className={`nav-drop-trigger ${isActive(['/category/sunglasses', '/category/sports-accessories', '/category/sport-accessories_glasses']) ? 'active' : ''}`}
                 onClick={() => handleDropdownToggle('accessories')}
               >
-                Accessories
+                Accessories{' '}
+                <span className="drop-arrow">
+                  {openDropdown === 'accessories' ? '▴' : '▾'}
+                </span>
               </div>
               {openDropdown === 'accessories' && (
                 <ul className="nav-dropdown-menu">
                   <li className="nav-cat-li">
                     <Link
                       href="/category/sunglasses"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
                       Sunglasses
                     </Link>
@@ -474,17 +415,17 @@ function NavBar() {
                   <li className="nav-cat-li">
                     <Link
                       href="/category/sports-accessories"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      Sports Accessories
+                      Sports accessories
                     </Link>
                   </li>
                   <li className="nav-cat-li">
                     <Link
                       href="/category/all-accessories"
-                      onClick={() => setDropdownOpen(false)}
+                      onClick={() => setOpenDropdown(null)}
                     >
-                      All Accessories
+                      All accessories
                     </Link>
                   </li>
                 </ul>
@@ -493,29 +434,21 @@ function NavBar() {
           </ul>
         </div>
       </div>
+
+      {/* ── RIGHT SIDE: SEARCH + CART ── */}
       <div className="cart-search">
         <div className="nav-cart">
           <MobileSearch />
           <SearchBar />
 
-          <div className="all-cart">
-            <a className={isActive(['/checkout']) ? 'active' : ''}>
-              <FontAwesomeIcon
-                icon={faCartShopping}
-                size="lg"
-                onClick={toggleCart}
-                className="cart-icon"
-              />
-            </a>
-            <p className={isActive(['/checkout']) ? 'active' : ''}>
-              ({totalItems})
-            </p>
-          </div>
+          <button className="nav-cart-btn" onClick={toggleCart}>
+            <FontAwesomeIcon icon={faCartShopping} />
+            Cart
+            <span className="nav-cart-badge">{totalItems}</span>
+          </button>
 
           <Cart showCart={showCart} toggleCart={toggleCart} />
-          {showCart && (
-            <div className="cart-overlay" onClick={toggleCart}></div>
-          )}
+          {showCart && <div className="cart-overlay" onClick={toggleCart} />}
           <MobileMenu />
         </div>
       </div>

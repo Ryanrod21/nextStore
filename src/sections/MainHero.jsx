@@ -69,7 +69,7 @@ const categoryGroups = [
 function MainHero() {
   const [product, setProduct] = useState([]);
   const { addToCart } = useCart();
-  const [addedProducts, setAddedProducts] = useState({}); // track added state per product
+  const [addedProducts, setAddedProducts] = useState({});
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -77,7 +77,6 @@ function MainHero() {
         const data = await getAllProducts();
         const allCategories = await getAllCategory();
         console.log('All categories available:', allCategories);
-
         setProduct(data.products);
       } catch (error) {
         console.error(error);
@@ -89,154 +88,150 @@ function MainHero() {
 
   return (
     <div className="main-page">
-      <div className="main-page-products">
-        <div className="featured-container">
-          <div className="featured-item">
-            <h2>Highly Rated Items:</h2>
-            <div className="all-feat-product">
-              {product
-                .filter(
-                  (item) => item.rating && typeof item.rating === 'number'
-                )
-                .sort((a, b) => b.rating - a.rating)
-                .slice(0, 3)
-                .map((item) => (
-                  <div className="product" key={item.id}>
-                    <Link href={`/product/${item.id}`}>
-                      <Image
-                        src={item.images[0]}
-                        alt={item.title}
-                        width={400}
-                        height={400}
-                        style={{ objectFit: 'contain' }}
-                        unoptimized
-                      />
-                    </Link>
-                    <p>{item.title}</p>
-                    <StarRating rating={item.rating} />
-                  </div>
-                ))}
-            </div>
-          </div>
+      {/* ── TOP RATED STRIP ── */}
+      <section className="top-rated-section">
+        <div className="section-header">
+          <h2 className="section-title">Top rated</h2>
+          <span className="section-more">View all →</span>
         </div>
+        <div className="feat-grid">
+          {product
+            .filter((item) => item.rating && typeof item.rating === 'number')
+            .sort((a, b) => b.rating - a.rating)
+            .slice(0, 3)
+            .map((item) => (
+              <div className="feat-card" key={item.id}>
+                <Link href={`/product/${item.id}`}>
+                  <div className="feat-img-wrap">
+                    <Image
+                      src={item.images[0]}
+                      alt={item.title}
+                      width={72}
+                      height={72}
+                      style={{ objectFit: 'contain' }}
+                      unoptimized
+                    />
+                  </div>
+                </Link>
+                <div className="feat-body">
+                  <p className="feat-name">{item.title}</p>
+                  <StarRating rating={item.rating} />
+                </div>
+                <span className="feat-badge">Top pick</span>
+              </div>
+            ))}
+        </div>
+      </section>
 
-        {categoryGroups.map(({ title, categories, link, linkText }) => (
-          <div className="product-sub-box" key={link}>
-            <h1
-              style={{
-                fontSize: '45px',
-                marginBottom: '70px',
-              }}
-            >
-              {title}
-            </h1>
-            <div className="row">
+      {/* ── CATEGORY SECTIONS ── */}
+      {categoryGroups.map(({ title, categories, link, linkText }) => {
+        const isBeauty = title.toLowerCase().includes('beauty');
+
+        return (
+          <section
+            className={`category-section ${isBeauty ? 'category-section--dark' : ''}`}
+            key={link}
+          >
+            <div className="section-header">
+              <h2 className="section-title">{title}</h2>
+              <Link href={`category/${link}`} className="section-more">
+                {linkText} →
+              </Link>
+            </div>
+
+            <div className="prod-grid">
               {product
                 .filter((item) => categories.includes(item.category))
                 .slice(0, 4)
                 .map((items) => (
-                  <div className="product" key={items.id}>
+                  <div
+                    className={`prod-card ${isBeauty ? 'prod-card--dark' : ''}`}
+                    key={items.id}
+                  >
                     <Link href={`/product/${items.id}`}>
-                      <Image
-                        src={items.images[0]}
-                        alt={items.title}
-                        width={400}
-                        height={400}
-                        style={{ objectFit: 'contain' }}
-                        unoptimized
-                      />
+                      <div className="prod-img-wrap">
+                        <Image
+                          src={items.images[0]}
+                          alt={items.title}
+                          width={400}
+                          height={400}
+                          style={{ objectFit: 'contain' }}
+                          unoptimized
+                        />
+                        <span
+                          className={`stock-dot ${
+                            items.availabilityStatus === 'In Stock'
+                              ? 'stock-dot--in'
+                              : items.availabilityStatus === 'Low Stock'
+                                ? 'stock-dot--low'
+                                : 'stock-dot--out'
+                          }`}
+                        />
+                      </div>
                     </Link>
-                    <div
-                      style={{
-                        backgroundColor: 'black',
-                        width: '100%',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                        borderRadius: '0 0 10px 10px',
-                        color: 'white',
-                      }}
-                    >
-                      <p
-                        className="front-prod-title"
-                        style={{
-                          fontSize: '26px',
-                          fontWeight: 'bold',
-                          marginBottom: '0',
-                        }}
-                      >
-                        {items.title}
-                      </p>
-                      <p style={{ fontWeight: 'bold', fontSize: '20px' }}>
+
+                    <div className="prod-body">
+                      <p className="prod-name">{items.title}</p>
+                      <p className="prod-price">
                         $
                         {items.price.toLocaleString(undefined, {
                           minimumFractionDigits: 2,
                           maximumFractionDigits: 2,
                         })}
                       </p>
-                      <p
-                        className={
-                          items.availabilityStatus === 'In Stock'
-                            ? 'in-stock'
-                            : items.availabilityStatus === 'Low Stock'
-                            ? 'low-stock'
-                            : 'out-of-stock'
-                        }
-                      >
-                        {items.availabilityStatus}
-                      </p>
-
-                      <StarRating rating={items.rating} />
+                      <div className="prod-meta">
+                        <StarRating rating={items.rating} />
+                        <span
+                          className={`availability-badge ${
+                            items.availabilityStatus === 'In Stock'
+                              ? 'availability-badge--in'
+                              : items.availabilityStatus === 'Low Stock'
+                                ? 'availability-badge--low'
+                                : 'availability-badge--out'
+                          }`}
+                        >
+                          {items.availabilityStatus}
+                        </span>
+                      </div>
 
                       {addedProducts[items.id] ? (
-                        <p
-                          style={{
-                            width: '100%',
-                            marginBottom: '30px',
-                            fontSize: '24px',
-                          }}
-                          className="item-added"
-                        >
-                          Item added to cart!
-                        </p>
-                      ) : (
-                        <div className="front-product">
-                          <button
-                            type="button"
-                            disabled={
-                              items.availabilityStatus !== 'In Stock' &&
-                              items.availabilityStatus !== 'Low Stock'
-                            }
-                            onClick={() => {
-                              addToCart(items);
-                              setAddedProducts((prev) => ({
-                                ...prev,
-                                [items.id]: true,
-                              }));
-                              setTimeout(
-                                () =>
-                                  setAddedProducts((prev) => ({
-                                    ...prev,
-                                    [items.id]: false,
-                                  })),
-                                4000
-                              );
-                            }}
-                          >
-                            Add to Cart
-                          </button>
+                        <div className="added-confirm">
+                          <span className="added-check">✓</span> Added to cart
                         </div>
+                      ) : (
+                        <button
+                          type="button"
+                          className={`prod-add-btn ${isBeauty ? 'prod-add-btn--dark' : ''}`}
+                          disabled={
+                            items.availabilityStatus !== 'In Stock' &&
+                            items.availabilityStatus !== 'Low Stock'
+                          }
+                          onClick={() => {
+                            addToCart(items);
+                            setAddedProducts((prev) => ({
+                              ...prev,
+                              [items.id]: true,
+                            }));
+                            setTimeout(
+                              () =>
+                                setAddedProducts((prev) => ({
+                                  ...prev,
+                                  [items.id]: false,
+                                })),
+                              4000,
+                            );
+                          }}
+                        >
+                          + Add to cart
+                        </button>
                       )}
                     </div>
                   </div>
                 ))}
             </div>
-            <Link href={`category/${link}`} className="link-button">
-              {linkText} <span className="arrow">→</span>
-            </Link>
-          </div>
-        ))}
-      </div>
+          </section>
+        );
+      })}
     </div>
   );
 }
